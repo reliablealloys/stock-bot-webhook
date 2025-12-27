@@ -1,0 +1,30 @@
+{
+  "PARTH": {
+    "19": {"304L": {"shape": "Round", "quality": "Black Coil", "weight": 3906}},
+    "6": {"316L": {"shape": "Round", "quality": "Black Coil", "weight": 1157}},
+    "9": {"316L": {"shape": "Round", "quality": "Ann Coil", "weight": 1199}},
+    "7": {"303": {"shape": "Round", "quality": "Black Coil Ann", "weight": 6000}},
+    "8": {"303": {"shape": "Round", "quality": "Black Coil Ann", "weight": 2697}},
+    "15": {"303": {"shape": "Round", "quality": "Black Coil Ann", "weight": 4008}},
+    "20.5": {"304L": {"shape": "Hex", "quality": "Black Ann", "weight": 568}},
+    "23.5": {"304L": {"shape": "Hex", "quality": "Black Ann", "weight": 1024}}
+  },
+  "WADA": {
+    "100": {"304": {"shape": "Round", "quality": "Black", "weight": 1707}, "304L": {"shape": "Round", "quality": "Black", "weight": 3763}},
+    "110": {"304L": {"shape": "Round", "quality": "Black", "weight": 414}},
+    "150": {"304L": {"shape": "Round", "quality": "Black", "weight": 3613}},
+    "30": {"303": {"shape": "Round", "quality": "Black", "weight": 1523}},
+    "34": {"303": {"shape": "Round", "quality": "Black", "weight": 2460}},
+    "28": {"321": {"shape": "Round", "quality": "Black", "weight": 382}}
+  },
+  "TALOJA": {
+    "100": {"304L": {"shape": "Round", "quality": "Black", "weight": 1201}},
+    "105": {"304L": {"shape": "Round", "quality": "Black", "weight": 3575}},
+    "110": {"304L": {"shape": "Round", "quality": "Black", "weight": 4435}},
+    "115": {"303": {"shape": "Round", "quality": "Black Annealing", "weight": 2029}},
+    "140": {"303": {"shape": "Round", "quality": "Black Annealing", "weight": 2323}},
+    "200": {"316L": {"shape": "Round", "quality": "Black", "weight": 1312}},
+    "70": {"304L": {"shape": "Round", "quality": "Export", "weight": 2247}},
+    "75": {"304L": {"shape": "Round", "quality": "Export", "weight": 459}}
+  }
+}
