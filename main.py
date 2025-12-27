@@ -31,18 +31,18 @@ def search_inventory(query):
     
     # Extract size and grade
     size_match = re.search(r'(\d+\.?\d*)\s*mm', query)
-    grade_match = re.search(r'(303|304l?|316l?|316ti|duplex|321)', query, re.IGNORECASE)
-    shape_match = re.search(r'(round|hex|square|patti|pipe)', query, re.IGNORECASE)
+    grade_match = re.search(r'(202|303|304l?|316l?|316ti|duplex|321|1117)', query, re.IGNORECASE)
+    shape_match = re.search(r'(round|hex|square|patti|pipe|sheet)', query, re.IGNORECASE)
     
     if not size_match:
-        return "Please specify size (e.g., 19mm, 200mm, 6mm)"
+        return "Please specify size (e.g., 19mm, 200mm, 6mm, 0.5mm for sheets)"
     
     size = size_match.group(1)
     grade = grade_match.group(1).upper() if grade_match else None
     shape = shape_match.group(1).upper() if shape_match else None
     
     if not grade:
-        return f"Please specify grade (e.g., {size}mm 304L, {size}mm 316L, {size}mm 303)"
+        return f"Please specify grade (e.g., {size}mm 304L, {size}mm 316L, {size}mm 303, {size}mm 202)"
     
     # Normalize grade
     if grade == '304':
@@ -54,15 +54,24 @@ def search_inventory(query):
     results = []
     for location, sizes in INVENTORY.items():
         if size in sizes and grade in sizes[size]:
-            item = sizes[size][grade]
-            results.append({
-                'location': location,
-                'size': size,
-                'grade': grade,
-                'shape': item['shape'],
-                'quality': item['quality'],
-                'weight': item['weight']
-            })
+            items = sizes[size][grade]
+            # Handle both single dict and array of dicts
+            if isinstance(items, dict):
+                items = [items]
+            
+            for item in items:
+                # Match shape if specified
+                if shape and shape not in item['shape'].upper():
+                    continue
+                
+                results.append({
+                    'location': location,
+                    'size': size,
+                    'grade': grade,
+                    'shape': item['shape'],
+                    'quality': item['quality'],
+                    'weight': item['weight']
+                })
     
     if not results:
         # Try to find similar items
@@ -70,7 +79,11 @@ def search_inventory(query):
         for location, sizes in INVENTORY.items():
             for s, grades in sizes.items():
                 if grade in grades:
-                    similar.append(f"{s}mm {grades[grade]['shape']}")
+                    items = grades[grade]
+                    if isinstance(items, dict):
+                        items = [items]
+                    for item in items:
+                        similar.append(f"{s}mm {item['shape']}")
         
         if similar:
             similar_list = ', '.join(list(set(similar))[:5])
@@ -88,7 +101,7 @@ def search_inventory(query):
         response = f"✅ Yes, **{size}mm {grade}** is available at multiple locations:\n\n"
         for r in results:
             quality_text = f" ({r['quality']})" if r['quality'] else ""
-            response += f"📍 **{r['location']}**: {int(r['weight'])} kgs{quality_text}\n"
+            response += f"📍 **{r['location']}**: {int(r['weight'])} kgs - {r['shape']}{quality_text}\n"
         response += "\nWhich location do you prefer?"
         return response
 
@@ -120,7 +133,7 @@ def webhook():
             text = message.get('text', '')
             
             if text.startswith('/start'):
-                response = "Welcome to Reliable Alloys Stock Bot! 🏭\n\nI can check inventory across all our locations:\n• PARTH\n• WADA\n• TALOJA\n• SRG\n• SHEETS\n• RELIABLE ALLOYS\n\nSend me a query like:\n• 19mm 304L\n• 200mm round 316L\n• 6mm 303\n• 110mm 304L\n\nI'll check all locations instantly!"
+                response = "Welcome to Reliable Alloys Stock Bot! 🏭\n\nI can check inventory across all our locations:\n• PARTH\n• WADA\n• TALOJA\n• SRG\n• SHEETS\n\nSend me a query like:\n• 19mm 304L\n• 200mm round 316L\n• 6mm 303\n• 110mm 304L\n• 0.5mm 202 sheet\n\nI'll check all locations instantly!"
             elif text.startswith('/refresh'):
                 global INVENTORY
                 INVENTORY = load_inventory()
