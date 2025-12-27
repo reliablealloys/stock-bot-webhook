@@ -60,6 +60,10 @@ def search_inventory(query):
                 items = [items]
             
             for item in items:
+                # Skip negative weights
+                if item['weight'] <= 0:
+                    continue
+                    
                 # Match shape if specified
                 if shape and shape not in item['shape'].upper():
                     continue
@@ -83,26 +87,45 @@ def search_inventory(query):
                     if isinstance(items, dict):
                         items = [items]
                     for item in items:
-                        similar.append(f"{s}mm {item['shape']}")
+                        if item['weight'] > 0:
+                            similar.append(f"{s}mm {item['shape']}")
         
         if similar:
             similar_list = ', '.join(list(set(similar))[:5])
-            return f"Sorry, **{size}mm {grade}** is not available in stock.\n\nSimilar items available: {similar_list}\n\nPlease contact us for more options."
+            return f"❌ Sorry, **{size}mm {grade}** is not available in stock.\n\n✅ Similar items available: {similar_list}\n\nContact us for more options!"
         else:
-            return f"Sorry, **{size}mm {grade}** is not available in stock.\n\nPlease contact us for availability."
+            return f"❌ Sorry, **{size}mm {grade}** is not available in stock.\n\nContact us for availability!"
+    
+    # Calculate total weight and group by location
+    total_weight = sum(r['weight'] for r in results)
+    locations = list(set(r['location'] for r in results))
     
     # Format response
     if len(results) == 1:
         r = results[0]
-        quality_text = f" in **{r['quality']}**" if r['quality'] else ""
-        return f"✅ Yes, **{r['size']}mm {r['shape']} {r['grade']}** is available at **{r['location']}**{quality_text} - **{int(r['weight'])} kgs** in stock.\n\nHow many kgs do you need?"
+        quality_text = f" - {r['quality']}" if r['quality'] else ""
+        return f"✅ **{r['size']}mm {r['shape']} {r['grade']}** available!\n\n📦 **{int(r['weight'])} kgs** in stock\n📍 Location: **{r['location']}**{quality_text}\n\nHow many kgs do you need?"
     else:
+        # Multiple locations or qualities
+        response = f"✅ **{size}mm {grade}** available!\n\n"
+        response += f"📦 **Total: {int(total_weight)} kgs** across {len(locations)} location(s)\n\n"
+        response += "**Breakdown by location:**\n"
+        
         # Group by location
-        response = f"✅ Yes, **{size}mm {grade}** is available at multiple locations:\n\n"
+        location_data = {}
         for r in results:
-            quality_text = f" ({r['quality']})" if r['quality'] else ""
-            response += f"📍 **{r['location']}**: {int(r['weight'])} kgs - {r['shape']}{quality_text}\n"
-        response += "\nWhich location do you prefer?"
+            if r['location'] not in location_data:
+                location_data[r['location']] = []
+            location_data[r['location']].append(r)
+        
+        for location, items in location_data.items():
+            location_total = sum(item['weight'] for item in items)
+            response += f"\n📍 **{location}**: {int(location_total)} kgs\n"
+            for item in items:
+                quality_text = f" - {item['quality']}" if item['quality'] else ""
+                response += f"   • {item['shape']}: {int(item['weight'])} kgs{quality_text}\n"
+        
+        response += f"\n💬 Which location works best for you?"
         return response
 
 def send_message(chat_id, text):
@@ -133,7 +156,7 @@ def webhook():
             text = message.get('text', '')
             
             if text.startswith('/start'):
-                response = "Welcome to Reliable Alloys Stock Bot! 🏭\n\nI can check inventory across all our locations:\n• PARTH\n• WADA\n• TALOJA\n• SRG\n• SHEETS\n\nSend me a query like:\n• 19mm 304L\n• 200mm round 316L\n• 6mm 303\n• 110mm 304L\n• 0.5mm 202 sheet\n\nI'll check all locations instantly!"
+                response = "🏭 **Welcome to Reliable Alloys Stock Bot!**\n\nI check inventory across all locations:\n✓ PARTH\n✓ WADA\n✓ TALOJA\n✓ SRG\n✓ SHEETS\n\n**Example queries:**\n• 19mm 304L\n• 200mm round 316L\n• 6mm 303\n• 110mm 304L\n• 0.5mm 202 sheet\n\nI'll show you total stock and breakdown by location!"
             elif text.startswith('/refresh'):
                 global INVENTORY
                 INVENTORY = load_inventory()
