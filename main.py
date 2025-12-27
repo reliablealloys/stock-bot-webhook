@@ -100,33 +100,27 @@ def search_inventory(query):
     total_weight = sum(r['weight'] for r in results)
     locations = list(set(r['location'] for r in results))
     
-    # Format response
-    if len(results) == 1:
-        r = results[0]
-        quality_text = f" - {r['quality']}" if r['quality'] else ""
-        return f"✅ **{r['size']}mm {r['shape']} {r['grade']}** available!\n\n📦 **{int(r['weight'])} kgs** in stock\n📍 Location: **{r['location']}**{quality_text}\n\nHow many kgs do you need?"
-    else:
-        # Multiple locations or qualities
-        response = f"✅ **{size}mm {grade}** available!\n\n"
-        response += f"📦 **Total: {int(total_weight)} kgs** across {len(locations)} location(s)\n\n"
-        response += "**Breakdown by location:**\n"
-        
-        # Group by location
-        location_data = {}
-        for r in results:
-            if r['location'] not in location_data:
-                location_data[r['location']] = []
-            location_data[r['location']].append(r)
-        
-        for location, items in location_data.items():
-            location_total = sum(item['weight'] for item in items)
-            response += f"\n📍 **{location}**: {int(location_total)} kgs\n"
-            for item in items:
-                quality_text = f" - {item['quality']}" if item['quality'] else ""
-                response += f"   • {item['shape']}: {int(item['weight'])} kgs{quality_text}\n"
-        
-        response += f"\n💬 Which location works best for you?"
-        return response
+    # Always use the same format (Example 2 style)
+    response = f"✅ **{size}mm {grade}** available!\n\n"
+    response += f"📦 **Total: {int(total_weight)} kgs** across {len(locations)} location(s)\n\n"
+    response += "**Breakdown by location:**\n"
+    
+    # Group by location
+    location_data = {}
+    for r in results:
+        if r['location'] not in location_data:
+            location_data[r['location']] = []
+        location_data[r['location']].append(r)
+    
+    for location, items in location_data.items():
+        location_total = sum(item['weight'] for item in items)
+        response += f"\n📍 **{location}**: {int(location_total)} kgs\n"
+        for item in items:
+            quality_text = f" - {item['quality']}" if item['quality'] else ""
+            response += f"   • {item['shape']}: {int(item['weight'])} kgs{quality_text}\n"
+    
+    response += f"\n💬 Which location works best for you?"
+    return response
 
 def send_message(chat_id, text):
     """Send message via Telegram API"""
