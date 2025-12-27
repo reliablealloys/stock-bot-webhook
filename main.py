@@ -23,6 +23,16 @@ COMPANY_INFO = {
     'services': ['Stock availability', 'Custom cutting', 'Delivery across India']
 }
 
+# Last updated dates for each location (will be loaded from sheets)
+LAST_UPDATED = {
+    'PARTH': '25-12-2025',
+    'WADA': '25-12-2025',
+    'TALOJA': '20-12-2025',
+    'SRG': 'Not specified',
+    'SHEETS': '27-12-2025',
+    'RELIABLE ALLOYS': '16-9-2025'
+}
+
 # Load inventory from JSON file
 def load_inventory():
     """Load inventory from inventory.json file"""
@@ -156,6 +166,7 @@ def search_inventory(query):
     
     # Search across locations
     results = []
+    locations_found = set()
     for location, sizes in INVENTORY.items():
         if size in sizes and grade in sizes[size]:
             items = sizes[size][grade]
@@ -180,6 +191,7 @@ def search_inventory(query):
                     'quality': item['quality'],
                     'weight': item['weight']
                 })
+                locations_found.add(location)
     
     if not results:
         # Try to find similar items
@@ -220,10 +232,12 @@ def search_inventory(query):
     
     for location, items in location_data.items():
         location_total = sum(item['weight'] for item in items)
+        last_updated = LAST_UPDATED.get(location, 'Unknown')
         response += f"\n📍 **{location}**: {int(location_total)} kgs\n"
         for item in items:
             quality_text = f" - {item['quality']}" if item['quality'] else ""
             response += f"   • {item['shape']}: {int(item['weight'])} kgs{quality_text}\n"
+        response += f"   📅 *Last updated: {last_updated}*\n"
     
     # Add varied follow-up question
     response += f"\n💬 {random.choice(FOLLOWUP_QUESTIONS)} Which location works for you?"
