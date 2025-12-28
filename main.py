@@ -4,7 +4,7 @@ from flask import Flask, request, jsonify
 import requests
 import re
 import json
-import random
+import google.generativeai as genai
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -12,7 +12,16 @@ logger = logging.getLogger(__name__)
 app = Flask(__name__)
 
 BOT_TOKEN = os.environ.get('BOT_TOKEN', '8023224003:AAHNGp6QxZRfawYQn75Ww4_9OORFJhAJeCs')
+GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY')
 TELEGRAM_API = f'https://api.telegram.org/bot{BOT_TOKEN}'
+
+# Configure Gemini
+if GEMINI_API_KEY:
+    genai.configure(api_key=GEMINI_API_KEY)
+    model = genai.GenerativeModel('gemini-pro')
+else:
+    logger.warning("GEMINI_API_KEY not set - AI features will be disabled")
+    model = None
 
 # Company information
 COMPANY_INFO = {
@@ -23,7 +32,7 @@ COMPANY_INFO = {
     'services': ['Stock availability', 'Custom cutting', 'Delivery across India']
 }
 
-# Last updated dates for each location (will be loaded from sheets)
+# Last updated dates for each location
 LAST_UPDATED = {
     'PARTH': '25-12-2025',
     'WADA': '25-12-2025',
@@ -45,128 +54,23 @@ def load_inventory():
 
 INVENTORY = load_inventory()
 
-# Varied responses when bot doesn't understand
-CONFUSED_RESPONSES = [
-    "I'm not quite sure what you're looking for. Could you specify the size and grade?\n\n**Example:** *110mm 304L* or *6mm 303*",
-    "Hmm, I didn't catch that. Can you tell me the material size and grade you need?\n\n**Like:** *19mm 316L* or *200mm round 304L*",
-    "I want to help! Could you share the size and grade?\n\n**For example:** *28mm 1117* or *40mm 304L*",
-    "Let me help you find what you need. What size and grade are you looking for?\n\n**Try:** *110mm 304L* or *6mm 303 hex*",
-    "I'm here to check stock for you! Just need the size and grade.\n\n**Example:** *19mm 304L* or *100mm 316L*",
-    "Could you clarify what material you're looking for?\n\n**Format:** *[size]mm [grade]* like *110mm 304L*",
-    "I'd love to help! What's the size and grade you need?\n\n**Example:** *28mm 1117* or *42mm 304L*"
-]
+# Store conversation history per user
+conversation_history = {}
 
-# Varied responses when item not found
-NOT_FOUND_RESPONSES = [
-    "We don't have **{size}mm {grade}** in stock right now.",
-    "Sorry, **{size}mm {grade}** isn't available at the moment.",
-    "**{size}mm {grade}** is currently out of stock.",
-    "Unfortunately, we don't have **{size}mm {grade}** available right now.",
-    "**{size}mm {grade}** isn't in our current inventory."
-]
-
-# Varied follow-up questions
-FOLLOWUP_QUESTIONS = [
-    "How many kgs do you need?",
-    "What quantity are you looking for?",
-    "How much do you need?",
-    "What's your required quantity?",
-    "How many kgs would you like?"
-]
-
-def handle_general_query(text):
-    """Handle general questions and conversational queries"""
-    text_lower = text.lower()
-    
-    # Greetings
-    if any(word in text_lower for word in ['hello', 'hi', 'hey', 'good morning', 'good afternoon', 'good evening']):
-        greetings = [
-            "Hello! 👋 Welcome to Reliable Alloys!\n\nI can help you check stock availability. What are you looking for?\n\n**Example:** *110mm 304L* or *6mm 303*",
-            "Hi there! 😊 I'm here to help with stock queries.\n\nJust tell me what you need!\n\n**Try:** *19mm 316L* or *200mm round 304L*",
-            "Hey! Welcome to Reliable Alloys! 🏭\n\nLooking for something specific?\n\n**Example:** *28mm 1117* or *40mm 304L*",
-            "Good day! 👋 Ready to check stock for you.\n\nWhat material do you need?\n\n**Format:** *[size]mm [grade]*"
-        ]
-        return random.choice(greetings)
-    
-    # Contact/Address queries
-    if any(word in text_lower for word in ['address', 'location', 'where are you', 'contact', 'phone', 'email']):
-        return f"📍 **{COMPANY_INFO['name']}**\n\n📧 Email: {COMPANY_INFO['contact']}\n📞 Contact us for phone details\n\nWe have multiple godowns:\n• PARTH\n• WADA\n• TALOJA\n• SRG\n• SHEETS\n• RELIABLE ALLOYS\n\nWhat material are you looking for?"
-    
-    # Working hours
-    if any(word in text_lower for word in ['hours', 'timing', 'open', 'close', 'when']):
-        return "⏰ **Working Hours:**\nMonday - Saturday: 9:00 AM - 6:00 PM\nSunday: Closed\n\nWhat can I help you find today?"
-    
-    # Delivery queries
-    if any(word in text_lower for word in ['deliver', 'delivery', 'shipping', 'transport']):
-        return "🚚 **Delivery Available!**\n\nWe deliver across India. Delivery time and charges depend on:\n• Location\n• Quantity\n• Material type\n\nPlease share your requirement and location for a quote!\n\nWhat material do you need?"
-    
-    # Price queries
-    if any(word in text_lower for word in ['price', 'cost', 'rate', 'how much']):
-        return "💰 **Pricing Information:**\n\nPrices vary based on:\n• Material grade\n• Quantity\n• Current market rates\n• Delivery location\n\nPlease tell me what you need (e.g., *110mm 304L*) and I'll check availability. For pricing, contact: {}\n\nWhat are you looking for?".format(COMPANY_INFO['contact'])
-    
-    # Thank you
-    if any(word in text_lower for word in ['thank', 'thanks', 'appreciate']):
-        thanks_responses = [
-            "You're welcome! 😊\n\nNeed anything else?",
-            "Happy to help! 😊\n\nAnything else I can check for you?",
-            "My pleasure! 😊\n\nLet me know if you need more help!",
-            "Glad I could help! 😊\n\nFeel free to ask anything else!"
-        ]
-        return random.choice(thanks_responses)
-    
-    # Help
-    if 'help' in text_lower:
-        return "🏭 **How I Can Help:**\n\n✅ Check stock availability\n✅ Show quantities at each location\n✅ Answer general questions\n\n**Example queries:**\n• *110mm 304L*\n• *6mm 303 round*\n• *0.5mm 202 sheet*\n• *What's your address?*\n• *Do you deliver?*\n\nWhat would you like to know?"
-    
-    return None
-
-def search_inventory(query):
-    """Search inventory based on query"""
-    query_lower = query.lower()
-    
-    # Extract size and grade
-    size_match = re.search(r'(\d+\.?\d*)\s*mm', query_lower)
-    grade_match = re.search(r'(202|303|304l?|316l?|316ti|duplex|321|1117|en9|en36c|8620)', query_lower, re.IGNORECASE)
-    shape_match = re.search(r'(round|hex|square|patti|pipe|sheet)', query_lower, re.IGNORECASE)
+def search_inventory(size, grade, shape=None):
+    """Search inventory based on size, grade, and optional shape"""
+    # Normalize inputs
+    size = str(size).strip()
+    grade = grade.upper().strip()
     
     # Auto-correct common mistakes
-    corrections = []
-    if '304 ' in query_lower and '304l' not in query_lower:
-        query_lower = query_lower.replace('304 ', '304l ')
-        corrections.append("(Assuming you meant 304L)")
-    if '316 ' in query_lower and '316l' not in query_lower:
-        query_lower = query_lower.replace('316 ', '316l ')
-        corrections.append("(Assuming you meant 316L)")
-    
-    if not size_match:
-        return random.choice(CONFUSED_RESPONSES)
-    
-    size = size_match.group(1)
-    grade = grade_match.group(1).upper() if grade_match else None
-    shape = shape_match.group(1).upper() if shape_match else None
-    
-    if not grade:
-        grade_responses = [
-            f"Could you specify the grade for {size}mm?\n\n**Example:** *{size}mm 304L* or *{size}mm 316L*",
-            f"What grade do you need for {size}mm?\n\n**Like:** *{size}mm 303* or *{size}mm 304L*",
-            f"I need the grade for {size}mm to check stock.\n\n**Try:** *{size}mm 316L* or *{size}mm 1117*",
-            f"Which grade are you looking for in {size}mm?\n\n**Example:** *{size}mm 304L* or *{size}mm 303*"
-        ]
-        return random.choice(grade_responses)
-    
-    # Normalize grade
     if grade == '304':
         grade = '304L'
-        corrections.append("(Corrected to 304L)")
     elif grade == '316':
         grade = '316L'
-        corrections.append("(Corrected to 316L)")
-    
-    correction_text = " " + " ".join(corrections) if corrections else ""
     
     # Search across locations
     results = []
-    locations_found = set()
     for location, sizes in INVENTORY.items():
         if size in sizes and grade in sizes[size]:
             items = sizes[size][grade]
@@ -180,7 +84,7 @@ def search_inventory(query):
                     continue
                     
                 # Match shape if specified
-                if shape and shape not in item['shape'].upper():
+                if shape and shape.upper() not in item['shape'].upper():
                     continue
                 
                 results.append({
@@ -191,37 +95,22 @@ def search_inventory(query):
                     'quality': item['quality'],
                     'weight': item['weight']
                 })
-                locations_found.add(location)
     
+    return results
+
+def format_inventory_results(results, size, grade):
+    """Format inventory search results into a readable message"""
     if not results:
-        # Try to find similar items
-        similar = []
-        for location, sizes in INVENTORY.items():
-            for s, grades in sizes.items():
-                if grade in grades:
-                    items = grades[grade]
-                    if isinstance(items, dict):
-                        items = [items]
-                    for item in items:
-                        if item['weight'] > 0:
-                            similar.append(f"{s}mm {item['shape']}")
-        
-        not_found_msg = random.choice(NOT_FOUND_RESPONSES).format(size=size, grade=grade)
-        
-        if similar:
-            similar_list = ', '.join(list(set(similar))[:5])
-            return f"❌ {not_found_msg}{correction_text}\n\n✅ **Similar items available:** {similar_list}\n\n💬 Want to check any of these? Or contact us at {COMPANY_INFO['contact']}"
-        else:
-            return f"❌ {not_found_msg}{correction_text}\n\n📧 Contact us for availability: {COMPANY_INFO['contact']}"
+        return None
     
     # Calculate total weight and group by location
     total_weight = sum(r['weight'] for r in results)
     locations = list(set(r['location'] for r in results))
     
     # Format response
-    response = f"✅ **{size}mm {grade}**{correction_text} available!\n\n"
-    response += f"📦 **Total: {int(total_weight)} kgs** across {len(locations)} location(s)\n\n"
-    response += "**Breakdown by location:**\n"
+    response = f"✅ **{size}mm {grade}** available!\\n\\n"
+    response += f"📦 **Total: {int(total_weight)} kgs** across {len(locations)} location(s)\\n\\n"
+    response += "**Breakdown by location:**\\n"
     
     # Group by location
     location_data = {}
@@ -233,15 +122,148 @@ def search_inventory(query):
     for location, items in location_data.items():
         location_total = sum(item['weight'] for item in items)
         last_updated = LAST_UPDATED.get(location, 'Unknown')
-        response += f"\n📍 **{location}**: {int(location_total)} kgs\n"
+        response += f"\\n📍 **{location}**: {int(location_total)} kgs\\n"
         for item in items:
             quality_text = f" - {item['quality']}" if item['quality'] else ""
-            response += f"   • {item['shape']}: {int(item['weight'])} kgs{quality_text}\n"
-        response += f"   📅 *Last updated: {last_updated}*\n"
+            response += f"   • {item['shape']}: {int(item['weight'])} kgs{quality_text}\\n"
+        response += f"   📅 *Last updated: {last_updated}*\\n"
     
-    # Add varied follow-up question
-    response += f"\n💬 {random.choice(FOLLOWUP_QUESTIONS)} Which location works for you?"
     return response
+
+def get_available_grades():
+    """Get list of all available grades in inventory"""
+    grades = set()
+    for location, sizes in INVENTORY.items():
+        for size, grade_dict in sizes.items():
+            grades.update(grade_dict.keys())
+    return sorted(list(grades))
+
+def get_available_sizes_for_grade(grade):
+    """Get list of all available sizes for a specific grade"""
+    sizes = set()
+    for location, size_dict in INVENTORY.items():
+        for size, grade_dict in size_dict.items():
+            if grade.upper() in grade_dict:
+                sizes.add(size)
+    return sorted(list(sizes), key=lambda x: float(x))
+
+def create_system_prompt():
+    """Create system prompt for Gemini with inventory context"""
+    available_grades = get_available_grades()
+    
+    return f"""You are a helpful customer service assistant for Reliable Alloys, a stainless steel supplier in Mumbai, India.
+
+COMPANY INFORMATION:
+- Name: {COMPANY_INFO['name']}
+- Contact: {COMPANY_INFO['contact']}
+- Specialties: {', '.join(COMPANY_INFO['specialties'])}
+- Services: {', '.join(COMPANY_INFO['services'])}
+
+AVAILABLE GRADES IN INVENTORY:
+{', '.join(available_grades)}
+
+LOCATIONS:
+{', '.join(INVENTORY.keys())}
+
+YOUR ROLE:
+1. Be friendly, professional, and helpful
+2. When customers ask about stock, extract the SIZE and GRADE from their message
+3. If they mention a size without grade, ask which grade they need
+4. If they mention a grade without size, ask which size they need
+5. Answer general questions about the company, delivery, pricing, etc.
+6. Be conversational and natural - don't sound robotic
+7. If you're not sure what they're asking, politely ask for clarification
+
+IMPORTANT RULES:
+- Always extract size (in mm) and grade from customer queries
+- Common grades: 303, 304L, 316L, 316TI, DUPLEX, 321, 1117, EN9, EN36C, 8620
+- If customer says "304" assume they mean "304L"
+- If customer says "316" assume they mean "316L"
+- Be brief and to the point
+- Don't make up stock information - only I will provide actual stock data
+
+RESPONSE FORMAT:
+When you identify a stock query, respond with:
+STOCK_QUERY: size=<size>, grade=<grade>, shape=<shape if mentioned>
+
+For general queries, just respond naturally without the STOCK_QUERY prefix.
+
+Examples:
+Customer: "Do you have 50mm en36c?"
+You: STOCK_QUERY: size=50, grade=EN36C
+
+Customer: "I need 110mm 304L"
+You: STOCK_QUERY: size=110, grade=304L
+
+Customer: "What's your address?"
+You: We're located in Mumbai, India. You can reach us at sales@reliablealloys.in for detailed address and directions!
+
+Customer: "Do you deliver?"
+You: Yes, we deliver across India! Delivery time and charges depend on your location and quantity. What material are you looking for?"""
+
+def chat_with_gemini(user_message, chat_id):
+    """Chat with Gemini AI and handle stock queries"""
+    if not model:
+        return "AI features are currently unavailable. Please contact us at sales@reliablealloys.in"
+    
+    try:
+        # Get or create conversation history for this user
+        if chat_id not in conversation_history:
+            conversation_history[chat_id] = []
+        
+        # Add system prompt context
+        system_prompt = create_system_prompt()
+        
+        # Build conversation context
+        conversation_context = system_prompt + "\\n\\nCONVERSATION HISTORY:\\n"
+        for msg in conversation_history[chat_id][-5:]:  # Last 5 messages for context
+            conversation_context += f"{msg['role']}: {msg['content']}\\n"
+        conversation_context += f"Customer: {user_message}\\nYou: "
+        
+        # Generate response
+        response = model.generate_content(conversation_context)
+        ai_response = response.text.strip()
+        
+        # Store in conversation history
+        conversation_history[chat_id].append({'role': 'Customer', 'content': user_message})
+        conversation_history[chat_id].append({'role': 'Assistant', 'content': ai_response})
+        
+        # Keep only last 10 messages to avoid token limits
+        if len(conversation_history[chat_id]) > 10:
+            conversation_history[chat_id] = conversation_history[chat_id][-10:]
+        
+        # Check if this is a stock query
+        if ai_response.startswith('STOCK_QUERY:'):
+            # Parse the stock query
+            query_part = ai_response.replace('STOCK_QUERY:', '').strip()
+            params = {}
+            for param in query_part.split(','):
+                key, value = param.split('=')
+                params[key.strip()] = value.strip()
+            
+            size = params.get('size')
+            grade = params.get('grade')
+            shape = params.get('shape')
+            
+            # Search inventory
+            results = search_inventory(size, grade, shape)
+            
+            if results:
+                return format_inventory_results(results, size, grade)
+            else:
+                # Try to find similar items
+                similar_sizes = get_available_sizes_for_grade(grade)
+                if similar_sizes:
+                    similar_list = ', '.join([f"{s}mm" for s in similar_sizes[:5]])
+                    return f"❌ We don't have **{size}mm {grade}** in stock right now.\\n\\n✅ **Available sizes in {grade}:** {similar_list}\\n\\n💬 Would you like to check any of these? Or contact us at {COMPANY_INFO['contact']}"
+                else:
+                    return f"❌ We don't have **{size}mm {grade}** in stock right now.\\n\\n📧 Contact us for availability: {COMPANY_INFO['contact']}"
+        
+        return ai_response
+        
+    except Exception as e:
+        logger.error(f"Error in Gemini chat: {e}")
+        return "I'm having trouble processing your request. Please contact us at sales@reliablealloys.in or try again."
 
 def send_message(chat_id, text):
     """Send message via Telegram API"""
@@ -271,18 +293,18 @@ def webhook():
             text = message.get('text', '')
             
             if text.startswith('/start'):
-                response = "🏭 **Welcome to Reliable Alloys Stock Bot!**\n\nI'm here to help you with:\n✅ Stock availability across all locations\n✅ Material specifications\n✅ General inquiries\n\n**Our Locations:**\n• PARTH\n• WADA\n• TALOJA\n• SRG\n• SHEETS\n• RELIABLE ALLOYS\n\n**Try asking:**\n• *110mm 304L*\n• *28mm 1117*\n• *What's your address?*\n• *Do you deliver?*\n\nWhat can I help you with?"
+                response = "🏭 **Welcome to Reliable Alloys Stock Bot!**\\n\\nI'm your AI assistant powered by Gemini! I can help you with:\\n✅ Stock availability across all locations\\n✅ Material specifications\\n✅ General inquiries\\n\\n**Our Locations:**\\n• PARTH\\n• WADA\\n• TALOJA\\n• SRG\\n• SHEETS\\n• RELIABLE ALLOYS\\n\\n**Try asking:**\\n• *Do you have 110mm 304L?*\\n• *I need 50mm EN36C*\\n• *What's your address?*\\n• *Do you deliver to Bangalore?*\\n\\nWhat can I help you with?"
             elif text.startswith('/refresh'):
                 global INVENTORY
                 INVENTORY = load_inventory()
                 response = "✅ Inventory refreshed!"
+            elif text.startswith('/clear'):
+                if chat_id in conversation_history:
+                    conversation_history[chat_id] = []
+                response = "✅ Conversation history cleared!"
             else:
-                # First check if it's a general query
-                response = handle_general_query(text)
-                
-                # If not a general query, search inventory
-                if response is None:
-                    response = search_inventory(text)
+                # Use Gemini AI for all other messages
+                response = chat_with_gemini(text, chat_id)
             
             send_message(chat_id, response)
         
@@ -294,7 +316,7 @@ def webhook():
 @app.route('/')
 def index():
     """Health check endpoint"""
-    return 'Stock Bot is running! 🚀'
+    return 'Stock Bot with Gemini AI is running! 🚀'
 
 @app.route('/health')
 def health():
@@ -302,7 +324,8 @@ def health():
     inventory_count = sum(len(sizes) for sizes in INVENTORY.values())
     return jsonify({
         'status': 'healthy',
-        'bot': 'stock-bot-webhook',
+        'bot': 'stock-bot-webhook-gemini',
+        'ai_enabled': model is not None,
         'inventory_items': inventory_count,
         'locations': list(INVENTORY.keys())
     })
@@ -314,5 +337,5 @@ def get_inventory():
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 8080))
-    logger.info(f"Starting bot with {sum(len(sizes) for sizes in INVENTORY.values())} inventory items")
+    logger.info(f"Starting bot with Gemini AI and {sum(len(sizes) for sizes in INVENTORY.values())} inventory items")
     app.run(host='0.0.0.0', port=port)
