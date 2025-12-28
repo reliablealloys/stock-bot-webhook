@@ -21,7 +21,13 @@
   "PARTH": {
     "7": {"303": [{"shape": "Round", "quality": "Black Coil Ann", "weight": 6000}]},
     "8": {"303": [{"shape": "Round", "quality": "Black Coil Ann", "weight": 2697}]},
+    "13": {"303": [{"shape": "Round", "quality": "Black Coil Ann", "weight": 0}]},
+    "15": {"303": [{"shape": "Round", "quality": "Black Coil Ann", "weight": 4008}]},
+    "17.5": {"303": [{"shape": "Round", "quality": "Black Coil Ann", "weight": 2557}]},
     "19": {"303": [{"shape": "Round", "quality": "Export", "weight": 800}]},
+    "21": {"303": [{"shape": "Round", "quality": "Black Coil Ann", "weight": 1359}]},
+    "22.2": {"303": [{"shape": "Round", "quality": "Export", "weight": 29}]},
+    "26": {"303": [{"shape": "Round", "quality": "Black Ann", "weight": 3263}]},
     "33": {"303": [{"shape": "Round", "quality": "Export", "weight": 201}]},
     "6": {"304L": [{"shape": "Round", "quality": "Black Coil", "weight": 2975}]},
     "12": {"304L": [{"shape": "Round", "quality": "Export", "weight": 150}, {"shape": "Round", "quality": "Black Coil", "weight": 2230}]},
