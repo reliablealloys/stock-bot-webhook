@@ -1,21 +1,21 @@
 {
   "PARTH": {
-    "7": {"303": [{"shape": "Round", "quality": "Black Coil Ann", "weight": 500}]},
+    "7": {"303": [{"shape": "Round", "quality": "Black Coil Ann", "weight": 6000}]},
+    "8": {"303": [{"shape": "Round", "quality": "Black Coil Ann", "weight": 2697}]},
     "19": {"303": [{"shape": "Round", "quality": "Export", "weight": 800}]},
-    "33": {"303": [{"shape": "Round", "quality": "Export", "weight": 600}]},
-    "6": {"304L": [{"shape": "Round", "quality": "Black Coil", "weight": 1200}]},
-    "12": {"304L": [{"shape": "Round", "quality": "Export", "weight": 1500}]},
-    "25": {"304L": [{"shape": "Round", "quality": "Black Coil", "weight": 2000}]},
-    "58": {"304L": [{"shape": "Round", "quality": "Export", "weight": 1800}]},
-    "6.5": {"316L": [{"shape": "Round", "quality": "Black Coil", "weight": 900}]},
-    "12.5": {"316L": [{"shape": "Round", "quality": "Ann Coil", "weight": 1100}]},
-    "24": {"316L": [{"shape": "Round", "quality": "Export", "weight": 1300}]},
-    "20.5": {"304L": [{"shape": "Hex", "quality": "Black Ann", "weight": 700}]},
-    "23.5": {"304L": [{"shape": "Hex", "quality": "Black Ann", "weight": 650}]},
-    "15.88": {"316L": [{"shape": "Hex", "quality": "Black Ann", "weight": 800}]},
-    "38": {"316L": [{"shape": "Hex", "quality": "Export", "weight": 950}]},
-    "18": {"DUPLEX": [{"shape": "Round", "quality": "Black Ann Coil", "weight": 600}]},
-    "20": {"DUPLEX": [{"shape": "Round", "quality": "Export", "weight": 550}]}
+    "33": {"303": [{"shape": "Round", "quality": "Export", "weight": 201}]},
+    "6": {"304L": [{"shape": "Round", "quality": "Black Coil", "weight": 2975}]},
+    "12": {"304L": [{"shape": "Round", "quality": "Export", "weight": 150}, {"shape": "Round", "quality": "Black Coil", "weight": 2230}]},
+    "19": {"304L": [{"shape": "Round", "quality": "Black Coil", "weight": 3906}]},
+    "20": {"304L": [{"shape": "Round", "quality": "Black Coil", "weight": 3288}]},
+    "6.5": {"316L": [{"shape": "Round", "quality": "Black Coil", "weight": 1157}]},
+    "7": {"316L": [{"shape": "Round", "quality": "Black Coil", "weight": 2171}]},
+    "10": {"316L": [{"shape": "Round", "quality": "Black Coil", "weight": 2497}]},
+    "20.5": {"304L": [{"shape": "Hex", "quality": "Black Ann", "weight": 568}]},
+    "23.5": {"304L": [{"shape": "Hex", "quality": "Black Ann", "weight": 1024}]},
+    "15.88": {"316L": [{"shape": "Hex", "quality": "Black Ann", "weight": 2027}]},
+    "18": {"316L": [{"shape": "Hex", "quality": "Black Ann", "weight": 3146}], "DUPLEX": [{"shape": "Round", "quality": "Black Ann Coil", "weight": 6373}]},
+    "20": {"DUPLEX": [{"shape": "Round", "quality": "Export", "weight": 36}]}
   },
   "WADA": {
     "25": {"304L": [{"shape": "Round", "quality": "Black", "weight": 3763}]},
@@ -28,8 +28,7 @@
     "30": {"303": [{"shape": "Round", "quality": "Black", "weight": 1523}]},
     "34": {"303": [{"shape": "Round", "quality": "Black", "weight": 2460}]},
     "100": {"304": [{"shape": "Round", "quality": "Black", "weight": 1707}]},
-    "28": {"321": [{"shape": "Round", "quality": "Black", "weight": 382}]},
-    "28.2": {"321": [{"shape": "Round", "quality": "Black", "weight": 233}]},
+    "28": {"321": [{"shape": "Round", "quality": "Black", "weight": 615}]},
     "5.1": {"303": [{"shape": "Round", "quality": "Bright Export", "weight": 450}]},
     "70": {"303": [{"shape": "Round", "quality": "Bright DB", "weight": 800}]},
     "5": {"304L": [{"shape": "Round", "quality": "Bright Export", "weight": 350}]},
@@ -57,7 +56,7 @@
   },
   "TALOJA": {
     "60": {"316L": [{"shape": "Round", "quality": "Black", "weight": 590}]},
-    "100": {"316L": [{"shape": "Round", "quality": "Black", "weight": 1200}], "304L": [{"shape": "Round", "quality": "Black", "weight": 1201}]},
+    "100": {"316L": [{"shape": "Round", "quality": "Black", "weight": 1200}], "304L": [{"shape": "Round", "quality": "Black", "weight": 1201}], "8620": [{"shape": "Round", "quality": "Black", "weight": 2606}]},
     "120": {"316L": [{"shape": "Round", "quality": "Black", "weight": 1800}]},
     "200": {"316L": [{"shape": "Round", "quality": "Black", "weight": 2312}]},
     "140": {"304L": [{"shape": "Round", "quality": "Black", "weight": 4435}]},
@@ -73,12 +72,12 @@
     "1.5": {"202": [{"shape": "Sheet", "quality": "8x4 Silver", "weight": 1400}], "304": [{"shape": "Sheet", "quality": "10x4 Linen", "weight": 2000}]}
   },
   "RELIABLE ALLOYS": {
-    "28": {"1117": [{"shape": "Round", "quality": "Black", "weight": 800}]},
-    "40": {"1117": [{"shape": "Round", "quality": "Black", "weight": 1200}]},
-    "42": {"EN9": [{"shape": "Round", "quality": "Export", "weight": 1500}]},
-    "32": {"EN36C": [{"shape": "Round", "quality": "Black", "weight": 1000}]},
+    "28": {"1117": [{"shape": "Round", "quality": "Black", "weight": 510}]},
+    "40": {"1117": [{"shape": "Round", "quality": "Black", "weight": 2450}]},
+    "42": {"EN9": [{"shape": "Round", "quality": "Export", "weight": 350}]},
+    "32": {"EN36C": [{"shape": "Round", "quality": "Black", "weight": 1664}]},
     "50": {"EN36C": [{"shape": "Round", "quality": "Black", "weight": 2146}]},
-    "85": {"8620": [{"shape": "Round", "quality": "Black", "weight": 2500}]},
-    "100": {"8620": [{"shape": "Round", "quality": "Black", "weight": 3000}]}
+    "85": {"8620": [{"shape": "Round", "quality": "Black", "weight": 816}]},
+    "96": {"A106": [{"shape": "Pipe 96x86", "quality": "Black", "weight": 2243}]}
   }
 }
