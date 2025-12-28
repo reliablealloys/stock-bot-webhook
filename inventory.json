@@ -1,4 +1,23 @@
 {
+  "SHEETS": {
+    "0.35": {"202": [{"shape": "Sheet", "quality": "8x4 Rose Gold Wave No8", "weight": 0}]},
+    "0.45": {"202": [{"shape": "Sheet", "quality": "8x4 Gold No8", "weight": 31.6}, {"shape": "Sheet", "quality": "8x4 Embossed Lotus", "weight": 200.9}, {"shape": "Sheet", "quality": "8x4 Embossed Panda", "weight": 122.7}]},
+    "0.5": {"202": [{"shape": "Sheet", "quality": "8x4 Rose Gold No8", "weight": 212}, {"shape": "Sheet", "quality": "8x4 Black No8", "weight": 0}, {"shape": "Sheet", "quality": "8x4 Gold No4", "weight": 598.2}, {"shape": "Sheet", "quality": "8x4 Gold No8", "weight": 1113.9}, {"shape": "Sheet", "quality": "8x4 Rose Gold No4", "weight": 62}], "304": [{"shape": "Sheet", "quality": "8x4 Gold No8", "weight": 24.8}, {"shape": "Sheet", "quality": "8x4 Gold No8", "weight": 1238.2}, {"shape": "Sheet", "quality": "8x4 No4 PVC", "weight": 11.5}]},
+    "0.53": {"202": [{"shape": "Sheet", "quality": "8x4 Wooden Rose Gold No8", "weight": 337.5}]},
+    "0.6": {"202": [{"shape": "Sheet", "quality": "8x4 Green No8", "weight": 236.7}, {"shape": "Sheet", "quality": "8x4 Blue No8", "weight": 39.9}, {"shape": "Sheet", "quality": "8x4 Gold/Silver Punching", "weight": 537.7}, {"shape": "Sheet", "quality": "8x4 Silver Design", "weight": 108}, {"shape": "Sheet", "quality": "8x4 Silver/Gold Oval Design", "weight": 121.5}, {"shape": "Sheet", "quality": "8x4 Rose Gold Silver Punch", "weight": 0}, {"shape": "Sheet", "quality": "8x4 Black Gold Punch", "weight": 0}, {"shape": "Sheet", "quality": "8x4 Gold Punch", "weight": 67.5}, {"shape": "Sheet", "quality": "8x4 Purple White Punch", "weight": 166}], "304": [{"shape": "Sheet", "quality": "8x4 Rose Gold No8 PVC", "weight": 603}, {"shape": "Sheet", "quality": "8x4 Gold No8", "weight": 460.4}]},
+    "0.62": {"202": [{"shape": "Sheet", "quality": "8x4 Purple No8 (Not Proper)", "weight": 76.7}]},
+    "0.65": {"202": [{"shape": "Sheet", "quality": "8x4 Rose Gold No4", "weight": 777.2}]},
+    "0.7": {"202": [{"shape": "Sheet", "quality": "8x4 Black No8", "weight": 784.3}]},
+    "0.71": {"304": [{"shape": "Sheet", "quality": "8x4 Rose Gold No4", "weight": 802.9}, {"shape": "Sheet", "quality": "8x4 Bronze No4", "weight": 0}]},
+    "0.75": {"202": [{"shape": "Sheet", "quality": "8x4 Rose Gold No8", "weight": 0}, {"shape": "Sheet", "quality": "8x4 Gold No8", "weight": 1248.7}, {"shape": "Sheet", "quality": "8x4 Rose Gold No4", "weight": 145.5}, {"shape": "Sheet", "quality": "8x4 Embossed Lotus", "weight": 227.6}, {"shape": "Sheet", "quality": "8x4 Embossed Panda", "weight": 228.9}, {"shape": "Sheet", "quality": "8x4 No8 Mirror", "weight": 12.6}], "304": [{"shape": "Sheet", "quality": "8x4 Rose Gold No8 PVC", "weight": 352.6}, {"shape": "Sheet", "quality": "8x4 Black Hairline", "weight": 370}, {"shape": "Sheet", "quality": "8x4 Gold No4", "weight": 0}]},
+    "0.8": {"202": [{"shape": "Sheet", "quality": "8x4 No8 PVC", "weight": 0}, {"shape": "Sheet", "quality": "8x4 Antique Bronze", "weight": 0}], "304": [{"shape": "Sheet", "quality": "8x4 No4 PVC", "weight": 54.8}, {"shape": "Sheet", "quality": "8x4 Gold No8 PVC", "weight": 709.1}, {"shape": "Sheet", "quality": "8x4 BA/PVC No8 PVC", "weight": 14}, {"shape": "Sheet", "quality": "8x4 Gold Water Ripple (M)", "weight": 177}, {"shape": "Sheet", "quality": "8x4 Black Water Ripple (M)", "weight": 159.3}, {"shape": "Sheet", "quality": "8x4 Rose Gold Water Ripple (S)", "weight": 0}, {"shape": "Sheet", "quality": "8x4 Rose Gold Water Ripple (M)", "weight": 177}, {"shape": "Sheet", "quality": "8x4 Gold Water Ripple (S)", "weight": 177}, {"shape": "Sheet", "quality": "8x4 Black Water Ripple (S)", "weight": 177}, {"shape": "Sheet", "quality": "8x4 Black No8", "weight": 369.5}]},
+    "0.9": {"202": [{"shape": "Sheet", "quality": "8x4 Black No8", "weight": 0}, {"shape": "Sheet", "quality": "8x4 Gold No8", "weight": 866.1}], "304": [{"shape": "Sheet", "quality": "8x4 Rose Gold No4 PVC", "weight": 149.5}, {"shape": "Sheet", "quality": "8x4 Gold No8", "weight": 740.6}]},
+    "0.91": {"304": [{"shape": "Sheet", "quality": "8x4 Black No8", "weight": 563}, {"shape": "Sheet", "quality": "8x4 Sandblast Gold", "weight": 222}, {"shape": "Sheet", "quality": "8x4 Gold No4", "weight": 840}, {"shape": "Sheet", "quality": "8x4 Black No4 (Hairline)", "weight": 1180.2}, {"shape": "Sheet", "quality": "8x4 Rose Gold No4", "weight": 257.7}, {"shape": "Sheet", "quality": "8x4 Linen Silver", "weight": 625.5}, {"shape": "Sheet", "quality": "8x4 Bronze No4", "weight": 406.6}, {"shape": "Sheet", "quality": "8x4 Rose Gold Linen", "weight": 173.5}]},
+    "0.95": {"202": [{"shape": "Sheet", "quality": "8x4 Gold No8", "weight": 111.6}, {"shape": "Sheet", "quality": "8x4 Rose Gold No8", "weight": 646.9}]},
+    "1": {"202": [{"shape": "Sheet", "quality": "8x4 No8 PVC", "weight": 39.6}], "304": [{"shape": "Sheet", "quality": "8x4 Linen Rose Gold", "weight": 192.4}, {"shape": "Sheet", "quality": "8x4 BA/No8 PVC", "weight": 50.1}, {"shape": "Sheet", "quality": "8x4 Linen Gold", "weight": 169.6}, {"shape": "Sheet", "quality": "8x4 Gold No8 PVC", "weight": 119.9}, {"shape": "Sheet", "quality": "8x4 Linen Black", "weight": 194.7}]},
+    "1.2": {"202": [{"shape": "Sheet", "quality": "8x4 No8 PVC", "weight": 12.3}], "304": [{"shape": "Sheet", "quality": "8x4 No4 PVC", "weight": 0}, {"shape": "Sheet", "quality": "8x4 Gold No8 PVC", "weight": 213}, {"shape": "Sheet", "quality": "8x4 2B", "weight": 13.2}, {"shape": "Sheet", "quality": "8x4 Gold Linen", "weight": 990}, {"shape": "Sheet", "quality": "8x4 BA/No8 PVC", "weight": 39.4}]},
+    "1.5": {"202": [{"shape": "Sheet", "quality": "8x4 2B", "weight": 54.5}, {"shape": "Sheet", "quality": "8x4 No8 PVC", "weight": 25.1}], "304": [{"shape": "Sheet", "quality": "8x4 Leathar", "weight": 840}, {"shape": "Sheet", "quality": "8x4 Linen", "weight": 730}, {"shape": "Sheet", "quality": "8x4 Rombo", "weight": 850}, {"shape": "Sheet", "quality": "8x4 Checker Plate", "weight": 890}, {"shape": "Sheet", "quality": "8x4 2B JT Coil Cut", "weight": 0}, {"shape": "Sheet", "quality": "8x4 No4 PVC", "weight": 1132.7}, {"shape": "Sheet", "quality": "8x4 Gold No8", "weight": 69.1}, {"shape": "Sheet", "quality": "10x4 Gold No8", "weight": 787.3}]}
+  },
   "PARTH": {
     "7": {"303": [{"shape": "Round", "quality": "Black Coil Ann", "weight": 6000}]},
     "8": {"303": [{"shape": "Round", "quality": "Black Coil Ann", "weight": 2697}]},
@@ -6,16 +25,14 @@
     "33": {"303": [{"shape": "Round", "quality": "Export", "weight": 201}]},
     "6": {"304L": [{"shape": "Round", "quality": "Black Coil", "weight": 2975}]},
     "12": {"304L": [{"shape": "Round", "quality": "Export", "weight": 150}, {"shape": "Round", "quality": "Black Coil", "weight": 2230}]},
-    "19": {"304L": [{"shape": "Round", "quality": "Black Coil", "weight": 3906}]},
-    "20": {"304L": [{"shape": "Round", "quality": "Black Coil", "weight": 3288}]},
+    "20": {"304L": [{"shape": "Round", "quality": "Black Coil", "weight": 3288}], "DUPLEX": [{"shape": "Round", "quality": "Export", "weight": 36}]},
     "6.5": {"316L": [{"shape": "Round", "quality": "Black Coil", "weight": 1157}]},
     "7": {"316L": [{"shape": "Round", "quality": "Black Coil", "weight": 2171}]},
     "10": {"316L": [{"shape": "Round", "quality": "Black Coil", "weight": 2497}]},
     "20.5": {"304L": [{"shape": "Hex", "quality": "Black Ann", "weight": 568}]},
     "23.5": {"304L": [{"shape": "Hex", "quality": "Black Ann", "weight": 1024}]},
     "15.88": {"316L": [{"shape": "Hex", "quality": "Black Ann", "weight": 2027}]},
-    "18": {"316L": [{"shape": "Hex", "quality": "Black Ann", "weight": 3146}], "DUPLEX": [{"shape": "Round", "quality": "Black Ann Coil", "weight": 6373}]},
-    "20": {"DUPLEX": [{"shape": "Round", "quality": "Export", "weight": 36}]}
+    "18": {"316L": [{"shape": "Hex", "quality": "Black Ann", "weight": 3146}], "DUPLEX": [{"shape": "Round", "quality": "Black Ann Coil", "weight": 6373}]}
   },
   "WADA": {
     "25": {"304L": [{"shape": "Round", "quality": "Black", "weight": 3763}]},
@@ -28,17 +45,7 @@
     "30": {"303": [{"shape": "Round", "quality": "Black", "weight": 1523}]},
     "34": {"303": [{"shape": "Round", "quality": "Black", "weight": 2460}]},
     "100": {"304": [{"shape": "Round", "quality": "Black", "weight": 1707}]},
-    "28": {"321": [{"shape": "Round", "quality": "Black", "weight": 615}]},
-    "5.1": {"303": [{"shape": "Round", "quality": "Bright Export", "weight": 450}]},
-    "70": {"303": [{"shape": "Round", "quality": "Bright DB", "weight": 800}]},
-    "5": {"304L": [{"shape": "Round", "quality": "Bright Export", "weight": 350}]},
-    "18": {"304L": [{"shape": "Round", "quality": "Bright Export", "weight": 550}]},
-    "5.35": {"316L": [{"shape": "Round", "quality": "Bright Export", "weight": 400}]},
-    "32": {"316L": [{"shape": "Round", "quality": "Bright Export", "weight": 750}]},
-    "12.7": {"304L": [{"shape": "Hex", "quality": "Export", "weight": 600}]},
-    "9.5": {"316L": [{"shape": "Hex", "quality": "Export", "weight": 500}]},
-    "55": {"316L": [{"shape": "Hex", "quality": "NACE", "weight": 900}]},
-    "6.1": {"316L": [{"shape": "Square", "quality": "Export", "weight": 300}]}
+    "28": {"321": [{"shape": "Round", "quality": "Black", "weight": 615}]}
   },
   "SRG": {
     "5": {"303": [{"shape": "Round", "quality": "Export", "weight": 400}], "304L": [{"shape": "Round", "quality": "Export", "weight": 450}]},
@@ -64,17 +71,6 @@
     "75": {"316L": [{"shape": "Round", "quality": "Bright Export", "weight": 1100}]},
     "160": {"316L": [{"shape": "Round", "quality": "Bright Export", "weight": 2000}]},
     "70": {"304L": [{"shape": "Round", "quality": "Bright Export", "weight": 950}]}
-  },
-  "SHEETS": {
-    "0.35": {"202": [{"shape": "Sheet", "quality": "8x4 Rose Gold", "weight": 500}]},
-    "0.5": {"202": [{"shape": "Sheet", "quality": "8x4 Gold", "weight": 600}], "304": [{"shape": "Sheet", "quality": "8x4 No8", "weight": 800}]},
-    "0.6": {"202": [{"shape": "Sheet", "quality": "8x4 Purple White Punch", "weight": 166}]},
-    "0.62": {"202": [{"shape": "Sheet", "quality": "8x4 Purple No8 (Not Proper)", "weight": 76.7}]},
-    "0.65": {"202": [{"shape": "Sheet", "quality": "8x4 Rose Gold No4", "weight": 777.2}]},
-    "0.7": {"202": [{"shape": "Sheet", "quality": "8x4 Black No8", "weight": 784.3}]},
-    "0.75": {"202": [{"shape": "Sheet", "quality": "8x4 Rose Gold No8", "weight": 0}]},
-    "1": {"202": [{"shape": "Sheet", "quality": "8x4 Black", "weight": 1200}], "304": [{"shape": "Sheet", "quality": "8x4 Mirror", "weight": 1500}]},
-    "1.5": {"202": [{"shape": "Sheet", "quality": "8x4 Silver", "weight": 1400}], "304": [{"shape": "Sheet", "quality": "10x4 Linen", "weight": 2000}]}
   },
   "RELIABLE ALLOYS": {
     "28": {"1117": [{"shape": "Round", "quality": "Black", "weight": 510}]},
