@@ -6,17 +6,6 @@ import re
 import json
 from datetime import datetime, timedelta
 
-# Import inquiry handler
-from inquiry_handler import (
-    is_inquiry_request, 
-    extract_date_from_message,
-    check_authorization,
-    fetch_inquiries_by_date,
-    format_inquiry_response,
-    get_all_authorized_numbers
-)
-from sheets_helper import fetch_sheet_data
-
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
@@ -42,9 +31,6 @@ LAST_UPDATED = {
     'SHEETS': '27-12-2025',
     'RELIABLE ALLOYS': '16-9-2025'
 }
-
-# Inquiry sheet configuration
-INQUIRY_SHEET_ID = '1lI9c24H2Jg6DOMAOcJuzYXuTLNjc1FIdOPs507oM5ts'
 
 # Load inventory from JSON file
 def load_inventory():
@@ -81,60 +67,6 @@ def is_message_processed(message_id):
     # Mark as processed
     processed_messages[message_id] = current_time
     return False
-
-def get_user_phone(user_data):
-    """Extract phone number from Telegram user data"""
-    # Try to get phone from contact
-    if 'contact' in user_data and 'phone_number' in user_data['contact']:
-        return user_data['contact']['phone_number']
-    
-    # Try username (if it's a phone number)
-    if 'username' in user_data:
-        username = user_data['username']
-        # Check if username looks like a phone number
-        phone_match = re.search(r'\d{10,}', username)
-        if phone_match:
-            return phone_match.group(0)
-    
-    return None
-
-def handle_inquiry_request(message_text, user_data):
-    """Handle inquiry request from authorized users"""
-    try:
-        # Extract date from message
-        target_date = extract_date_from_message(message_text)
-        
-        if not target_date:
-            return "❌ Please specify a date. Example: 'inquiries 26/5/2025' or 'show inquiries for 28-5-2025'"
-        
-        # Fetch sheet data
-        logger.info(f"Fetching inquiry data for date: {target_date}")
-        sheets_data = fetch_sheet_data(INQUIRY_SHEET_ID)
-        
-        if not sheets_data:
-            return "❌ Unable to fetch inquiry data. Please make sure the Google Sheet is publicly accessible."
-        
-        # Get all authorized numbers from sheet
-        authorized_numbers = get_all_authorized_numbers(sheets_data)
-        logger.info(f"Authorized numbers: {authorized_numbers}")
-        
-        # Get user's phone number
-        user_phone = get_user_phone(user_data)
-        logger.info(f"User phone: {user_phone}")
-        
-        # Check authorization
-        if not check_authorization(user_phone, authorized_numbers):
-            return "🔒 **Access Denied**\n\nYou are not authorized to view inquiry data. Please contact the administrator."
-        
-        # Fetch inquiries for the date
-        inquiries = fetch_inquiries_by_date(sheets_data, target_date)
-        
-        # Format and return response
-        return format_inquiry_response(inquiries, target_date)
-        
-    except Exception as e:
-        logger.error(f"Error handling inquiry request: {e}")
-        return f"❌ Error processing inquiry request: {str(e)}"
 
 def search_inventory_flexible(query):
     """Flexible inventory search that extracts size, grade, shape from natural language"""
@@ -214,7 +146,7 @@ def format_stock_response(results):
     return response
 
 def handle_message(text):
-    """Handle regular messages without AI"""
+    """Handle regular messages"""
     text_lower = text.lower().strip()
     
     # Greetings
@@ -257,23 +189,15 @@ def webhook():
             message_id = message['message_id']
             chat_id = message['chat']['id']
             text = message.get('text', '')
-            user_data = message.get('from', {})
             
             # Check if message was already processed
             if is_message_processed(message_id):
                 logger.info(f"Message {message_id} already processed, skipping")
                 return {'ok': True}
             
-            # Check if it's an inquiry request
-            if is_inquiry_request(text):
-                logger.info(f"Inquiry request detected: {text}")
-                response = handle_inquiry_request(text, user_data)
-                send_message(chat_id, response)
-                return {'ok': True}
-            
             # Handle commands
             if text.startswith('/start'):
-                response = "🏭 **Welcome to Reliable Alloys!**\n\nI can help you with:\n\n✅ Stock availability across all locations\n✅ Inquiry tracking (authorized users)\n\n**Our Locations:**\n• PARTH • WADA • TALOJA\n• SRG • SHEETS • RELIABLE ALLOYS\n\n**Try:**\n• *50mm 304L*\n• *40mm EN36C*\n• *inquiries 26/5/2025* (authorized only)\n\nWhat can I help you with?"
+                response = "🏭 **Welcome to Reliable Alloys!**\n\nI can help you with:\n\n✅ Stock availability across all locations\n\n**Our Locations:**\n• PARTH • WADA • TALOJA\n• SRG • SHEETS • RELIABLE ALLOYS\n\n**Try:**\n• *50mm 304L*\n• *40mm EN36C*\n\nWhat can I help you with?"
             elif text.startswith('/refresh'):
                 global INVENTORY
                 INVENTORY = load_inventory()
@@ -291,7 +215,7 @@ def webhook():
 @app.route('/')
 def index():
     """Health check endpoint"""
-    return 'Stock Bot with Inquiry System is running! 🚀'
+    return 'Stock Bot is running! 🚀'
 
 @app.route('/health')
 def health():
@@ -299,10 +223,9 @@ def health():
     inventory_count = sum(len(sizes) for sizes in INVENTORY.values())
     return jsonify({
         'status': 'healthy',
-        'bot': 'stock-bot-inquiry',
+        'bot': 'stock-bot',
         'inventory_items': inventory_count,
-        'locations': list(INVENTORY.keys()),
-        'inquiry_system': True
+        'locations': list(INVENTORY.keys())
     })
 
 @app.route('/inventory')
@@ -313,5 +236,4 @@ def get_inventory():
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 8080))
     logger.info(f"Starting bot with {sum(len(sizes) for sizes in INVENTORY.values())} inventory items")
-    logger.info("Inquiry system enabled")
     app.run(host='0.0.0.0', port=port)
