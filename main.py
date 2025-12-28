@@ -77,32 +77,11 @@ def is_message_processed(message_id):
     processed_messages[message_id] = current_time
     return False
 
-def get_inventory_summary():
-    """Get a summary of all inventory for AI context"""
-    summary = []
-    for location, sizes in INVENTORY.items():
-        for size, grades in sizes.items():
-            for grade, items in grades.items():
-                if isinstance(items, dict):
-                    items = [items]
-                for item in items:
-                    if item['weight'] > 0:
-                        summary.append({
-                            'location': location,
-                            'size': size,
-                            'grade': grade,
-                            'shape': item['shape'],
-                            'quality': item['quality'],
-                            'weight': item['weight'],
-                            'last_updated': LAST_UPDATED.get(location, 'Unknown')
-                        })
-    return summary
-
 def search_inventory_flexible(query):
     """Flexible inventory search that extracts size, grade, shape from natural language"""
     query_lower = query.lower()
     
-    # Extract size
+    # Extract size - support both "17.5mm" and "17.5 mm" formats
     size_match = re.search(r'(\d+\.?\d*)\s*mm', query_lower)
     size = size_match.group(1) if size_match else None
     
@@ -122,16 +101,20 @@ def search_inventory_flexible(query):
     shape_match = re.search(r'(round|hex|square|patti|pipe|sheet)', query_lower, re.IGNORECASE)
     shape = shape_match.group(1) if shape_match else None
     
+    # If no size, grade, or shape detected, return empty (not all items)
+    if not size and not grade and not shape:
+        return []
+    
     # Search inventory
     results = []
     for location, sizes in INVENTORY.items():
         for inv_size, grades in sizes.items():
-            # Match size
-            if size and inv_size != size:
+            # Match size - exact match
+            if size and str(inv_size) != str(size):
                 continue
             
             for inv_grade, items in grades.items():
-                # Match grade
+                # Match grade - exact match
                 if grade and inv_grade != grade:
                     continue
                 
@@ -139,7 +122,7 @@ def search_inventory_flexible(query):
                     items = [items]
                 
                 for item in items:
-                    # Match shape
+                    # Match shape - flexible match
                     if shape and shape.lower() not in item['shape'].lower():
                         continue
                     
@@ -166,11 +149,11 @@ def handle_message_with_ai(user_message, chat_id):
         # Search inventory first
         inventory_results = search_inventory_flexible(user_message)
         
-        # Build context for AI
-        inventory_summary = get_inventory_summary()
+        logger.info(f"Query: {user_message}, Found: {len(inventory_results)} results")
         
         # Create prompt
-        prompt = f"""You are an intelligent assistant for Reliable Alloys, a steel and alloy supplier in Mumbai, India.
+        if inventory_results:
+            prompt = f"""You are an intelligent assistant for Reliable Alloys, a steel and alloy supplier in Mumbai, India.
 
 Company Information:
 - Name: {COMPANY_INFO['name']}
@@ -179,21 +162,37 @@ Company Information:
 
 User Query: {user_message}
 
-Inventory Search Results:
-{json.dumps(inventory_results, indent=2) if inventory_results else "No exact matches found"}
+Inventory Search Results (Found {len(inventory_results)} items):
+{json.dumps(inventory_results[:10], indent=2)}
 
 Instructions:
-1. If inventory results are found, provide a clear, friendly response with:
-   - Availability confirmation
-   - Quantities and locations
-   - Quality/finish details
-   - Last updated date
-2. If no results, suggest alternatives or ask for clarification
-3. For general questions about materials, provide helpful information
-4. Always be professional and helpful
-5. Keep responses concise but informative
+1. Provide a clear, friendly response confirming availability
+2. List the top 5 results with location, size, grade, shape, quantity, and quality
+3. Mention the last updated date
+4. Keep response concise and professional
+5. Use emojis appropriately (✅, 📍, etc.)
 
-Respond naturally and professionally:"""
+Respond naturally:"""
+        else:
+            prompt = f"""You are an intelligent assistant for Reliable Alloys, a steel and alloy supplier in Mumbai, India.
+
+Company Information:
+- Name: {COMPANY_INFO['name']}
+- Contact: {COMPANY_INFO['contact']}
+- Locations: {', '.join(COMPANY_INFO['locations'])}
+
+User Query: {user_message}
+
+No inventory matches found for this query.
+
+Instructions:
+1. If it's a greeting (hi, hello, hey), respond warmly and ask how you can help
+2. If it's a stock query, politely say you couldn't find exact matches
+3. Suggest they contact {COMPANY_INFO['contact']} for assistance
+4. Ask if they'd like to search for something else
+5. Keep response friendly and helpful
+
+Respond naturally:"""
 
         # Get AI response
         response = model.generate_content(prompt)
@@ -215,7 +214,7 @@ Respond naturally and professionally:"""
         logger.error(f"Error in AI handler: {e}")
         # Fallback to simple response
         if inventory_results:
-            response = f"✅ **Found {len(inventory_results)} items:**\n\n"
+            response = f"✅ **Found {len(inventory_results)} item(s):**\n\n"
             for item in inventory_results[:5]:
                 response += f"📍 **{item['location']}**: {item['size']}mm {item['grade']} {item['shape']} - {int(item['weight'])} kgs ({item['quality']})\n"
             return response
