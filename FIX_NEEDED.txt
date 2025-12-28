@@ -1,0 +1,9 @@
+# Fix for line 165 in main.py
+# BEFORE (broken):
+# size_match = re.search(r'(\\d+\\.?\\d*)\\s*mm', text_lower)
+
+# AFTER (fixed):
+# size_match = re.search(r'(\d+\.?\d*)\s*mm', text_lower)
+
+# The issue: Double backslashes (\\d) don't match digits in regex
+# Solution: Use single backslash (\d) to match digits
