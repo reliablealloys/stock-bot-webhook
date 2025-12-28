@@ -5,6 +5,7 @@ import requests
 import re
 import json
 import google.generativeai as genai
+from datetime import datetime, timedelta
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -51,6 +52,30 @@ INVENTORY = load_inventory()
 
 # Store conversation context per user
 user_context = {}
+
+# Store processed message IDs to prevent duplicates
+processed_messages = {}
+
+def is_message_processed(message_id):
+    """Check if message was already processed"""
+    current_time = datetime.now()
+    
+    # Clean up old entries (older than 5 minutes)
+    to_remove = []
+    for msg_id, timestamp in processed_messages.items():
+        if current_time - timestamp > timedelta(minutes=5):
+            to_remove.append(msg_id)
+    
+    for msg_id in to_remove:
+        del processed_messages[msg_id]
+    
+    # Check if current message was processed
+    if message_id in processed_messages:
+        return True
+    
+    # Mark as processed
+    processed_messages[message_id] = current_time
+    return False
 
 def get_inventory_summary():
     """Get a summary of all inventory for AI context"""
@@ -101,12 +126,12 @@ def search_inventory_flexible(query):
     results = []
     for location, sizes in INVENTORY.items():
         for inv_size, grades in sizes.items():
-            # Match size if specified
+            # Match size
             if size and inv_size != size:
                 continue
             
             for inv_grade, items in grades.items():
-                # Match grade if specified
+                # Match grade
                 if grade and inv_grade != grade:
                     continue
                 
@@ -114,75 +139,69 @@ def search_inventory_flexible(query):
                     items = [items]
                 
                 for item in items:
-                    if item['weight'] <= 0:
+                    # Match shape
+                    if shape and shape.lower() not in item['shape'].lower():
                         continue
                     
-                    # Match shape if specified
-                    if shape and shape.upper() not in item['shape'].upper():
-                        continue
-                    
-                    results.append({
-                        'location': location,
-                        'size': inv_size,
-                        'grade': inv_grade,
-                        'shape': item['shape'],
-                        'quality': item['quality'],
-                        'weight': item['weight'],
-                        'last_updated': LAST_UPDATED.get(location, 'Unknown')
-                    })
+                    if item['weight'] > 0:
+                        results.append({
+                            'location': location,
+                            'size': inv_size,
+                            'grade': inv_grade,
+                            'shape': item['shape'],
+                            'quality': item['quality'],
+                            'weight': item['weight'],
+                            'last_updated': LAST_UPDATED.get(location, 'Unknown')
+                        })
     
     return results
 
-def handle_message_with_ai(text, chat_id):
-    """Handle messages using Gemini AI for intelligent responses"""
-    
-    # Get conversation history
-    if chat_id not in user_context:
-        user_context[chat_id] = {'history': []}
-    
-    # Search inventory based on query
-    inventory_results = search_inventory_flexible(text)
-    
-    # Prepare context for AI
-    system_prompt = f"""You are an intelligent assistant for Reliable Alloys, a steel and alloy supplier in Mumbai, India.
+def handle_message_with_ai(user_message, chat_id):
+    """Handle message using Gemini AI"""
+    try:
+        # Initialize context for new users
+        if chat_id not in user_context:
+            user_context[chat_id] = {'history': []}
+        
+        # Search inventory first
+        inventory_results = search_inventory_flexible(user_message)
+        
+        # Build context for AI
+        inventory_summary = get_inventory_summary()
+        
+        # Create prompt
+        prompt = f"""You are an intelligent assistant for Reliable Alloys, a steel and alloy supplier in Mumbai, India.
 
-COMPANY INFO:
+Company Information:
 - Name: {COMPANY_INFO['name']}
 - Contact: {COMPANY_INFO['contact']}
 - Locations: {', '.join(COMPANY_INFO['locations'])}
 
-YOUR ROLE:
-- Help customers find materials in inventory
-- Provide detailed, professional responses
-- Explain material specifications when asked
-- Be conversational and helpful
-- Always include relevant stock information when available
+User Query: {user_message}
 
-RESPONSE STYLE:
-- Use emojis appropriately (📍 for locations, ✅ for available, ❌ for unavailable, 📦 for quantities)
-- Format with **bold** for emphasis
-- Be concise but informative
-- Include last updated dates for stock information
-- Suggest alternatives if exact match not found
-
-CURRENT QUERY: {text}
-
-INVENTORY SEARCH RESULTS:
+Inventory Search Results:
 {json.dumps(inventory_results, indent=2) if inventory_results else "No exact matches found"}
 
-FULL INVENTORY CONTEXT (for reference):
-{json.dumps(get_inventory_summary(), indent=2)}
+Instructions:
+1. If inventory results are found, provide a clear, friendly response with:
+   - Availability confirmation
+   - Quantities and locations
+   - Quality/finish details
+   - Last updated date
+2. If no results, suggest alternatives or ask for clarification
+3. For general questions about materials, provide helpful information
+4. Always be professional and helpful
+5. Keep responses concise but informative
 
-Respond to the customer's query naturally and helpfully. If they ask about stock, provide detailed information. If they ask general questions about materials, answer knowledgeably."""
+Respond naturally and professionally:"""
 
-    try:
-        # Generate response using Gemini
-        response = model.generate_content(system_prompt)
+        # Get AI response
+        response = model.generate_content(prompt)
         ai_response = response.text
         
-        # Store in conversation history
+        # Store in context
         user_context[chat_id]['history'].append({
-            'user': text,
+            'user': user_message,
             'bot': ai_response
         })
         
@@ -193,10 +212,10 @@ Respond to the customer's query naturally and helpfully. If they ask about stock
         return ai_response
         
     except Exception as e:
-        logger.error(f"Error with Gemini API: {e}")
-        # Fallback to basic response
+        logger.error(f"Error in AI handler: {e}")
+        # Fallback to simple response
         if inventory_results:
-            response = f"✅ Found {len(inventory_results)} item(s):\n\n"
+            response = f"✅ **Found {len(inventory_results)} items:**\n\n"
             for item in inventory_results[:5]:
                 response += f"📍 **{item['location']}**: {item['size']}mm {item['grade']} {item['shape']} - {int(item['weight'])} kgs ({item['quality']})\n"
             return response
@@ -227,8 +246,14 @@ def webhook():
         
         if 'message' in update:
             message = update['message']
+            message_id = message['message_id']
             chat_id = message['chat']['id']
             text = message.get('text', '')
+            
+            # Check if message was already processed
+            if is_message_processed(message_id):
+                logger.info(f"Message {message_id} already processed, skipping")
+                return {'ok': True}
             
             if text.startswith('/start'):
                 response = "🏭 **Welcome to Reliable Alloys AI Assistant!**\n\nI'm an intelligent bot powered by AI. I can help you with:\n\n✅ Stock availability across all locations\n✅ Material specifications and details\n✅ General questions about alloys and steel\n✅ Recommendations and alternatives\n\n**Our Locations:**\n• PARTH\n• WADA\n• TALOJA\n• SRG\n• SHEETS\n• RELIABLE ALLOYS\n\n**Try asking:**\n• *Do you have 50mm 304L?*\n• *What is A106 Grade B pipe?*\n• *How much scrap is in stock?*\n• *Tell me about EN36C material*\n\nWhat can I help you with?"
