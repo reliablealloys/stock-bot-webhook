@@ -161,8 +161,8 @@ def handle_message(text, chat_id):
     if 'help' in text_lower:
         return "🏭 **How I Can Help:**\n\n✅ Check stock availability\n✅ Show quantities at each location\n✅ Answer general questions\n\n**Example queries:**\n• *110mm 304L*\n• *50mm EN36C*\n• *What's your address?*\n• *Do you deliver?*\n\nWhat would you like to know?"
     
-    # Extract size and grade for stock queries
-    size_match = re.search(r'(\\d+\\.?\\d*)\\s*mm', text_lower)
+    # Extract size and grade for stock queries - FIXED REGEX HERE
+    size_match = re.search(r'(\d+\.?\d*)\s*mm', text_lower)
     grade_match = re.search(r'(202|303|304l?|316l?|316ti|duplex|321|1117|en9|en36c|8620|a106)', text_lower, re.IGNORECASE)
     shape_match = re.search(r'(round|hex|square|patti|pipe|sheet)', text_lower, re.IGNORECASE)
     
