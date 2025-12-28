@@ -1,0 +1,15 @@
+{
+  "updates": {
+    "WADA": {
+      "6": {
+        "304L": [{"shape": "Round", "quality": "Export", "weight": 255}]
+      }
+    },
+    "SRG": {
+      "6": {
+        "304L": [{"shape": "Round", "quality": "Export", "weight": 1434.4}]
+      }
+    }
+  },
+  "note": "Manual patch for 6mm 304L Export weights - WADA: 255kg, SRG: 1434.4kg"
+}
