@@ -1,21 +1,7 @@
-{
-  "name": "Reliable Alloys Stock Bot",
-  "description": "Telegram stock bot with Gemini AI for instant customer responses",
-  "repository": "https://github.com/reliablealloys/stock-bot-webhook",
-  "services": [
-    {
-      "name": "stock-bot",
-      "type": "web",
-      "env": {
-        "BOT_TOKEN": {
-          "description": "Telegram Bot Token",
-          "default": "8023224003:AAHNGp6QxZRfawYQn75Ww4_9OORFJhAJeCs"
-        },
-        "GEMINI_API_KEY": {
-          "description": "Google Gemini API Key - Get from https://makersuite.google.com/app/apikey",
-          "required": true
-        }
-      }
-    }
-  ]
-}
+[build]
+builder = "NIXPACKS"
+
+[deploy]
+startCommand = "gunicorn main:app --bind 0.0.0.0:$PORT"
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 10
