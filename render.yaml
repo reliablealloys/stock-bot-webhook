@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: reliable-alloys-stock-bot
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn main:app
+    envVars:
+      - key: BOT_TOKEN
+        value: 8023224003:AAHNGp6QxZRfawYQn75Ww4_9OORFJhAJeCs
+      - key: GEMINI_API_KEY
+        generateValue: true
+      - key: PYTHON_VERSION
+        value: 3.11.0
