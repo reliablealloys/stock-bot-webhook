@@ -5,6 +5,8 @@ import requests
 import re
 import json
 from datetime import datetime, timedelta
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -13,6 +15,11 @@ app = Flask(__name__)
 
 BOT_TOKEN = os.environ.get('BOT_TOKEN', '8023224003:AAHNGp6QxZRfawYQn75Ww4_9OORFJhAJeCs')
 TELEGRAM_API = f'https://api.telegram.org/bot{BOT_TOKEN}'
+
+# Inquiry system configuration
+INQUIRY_SHEET_ID = '1lI9c24H2Jg6DOMAOcJuzYXuTLNjc1FIdOPs507oM5ts'
+INQUIRY_SHEET_NAME = 'DEMO LINKS'
+AUTHORIZED_NUMBERS = ['9831935522']  # Add more authorized numbers here
 
 # Company information
 COMPANY_INFO = {
@@ -67,6 +74,97 @@ def is_message_processed(message_id):
     # Mark as processed
     processed_messages[message_id] = current_time
     return False
+
+def get_google_sheets_client():
+    """Initialize Google Sheets client"""
+    try:
+        # Get credentials from environment variable
+        creds_json = os.environ.get('GOOGLE_SHEETS_CREDENTIALS')
+        if not creds_json:
+            logger.error("GOOGLE_SHEETS_CREDENTIALS not found")
+            return None
+        
+        creds_dict = json.loads(creds_json)
+        scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
+        creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
+        return gspread.authorize(creds)
+    except Exception as e:
+        logger.error(f"Error initializing Google Sheets: {e}")
+        return None
+
+def is_authorized(phone_number):
+    """Check if phone number is authorized"""
+    # Remove any formatting from phone number
+    clean_number = re.sub(r'[^\d]', '', str(phone_number))
+    
+    for auth_number in AUTHORIZED_NUMBERS:
+        clean_auth = re.sub(r'[^\d]', '', str(auth_number))
+        if clean_number.endswith(clean_auth) or clean_auth.endswith(clean_number):
+            return True
+    return False
+
+def parse_date(date_str):
+    """Parse date from various formats"""
+    # Try different date formats
+    formats = ['%d/%m/%Y', '%d-%m-%Y', '%d/%m/%y', '%d-%m-%y']
+    
+    for fmt in formats:
+        try:
+            return datetime.strptime(date_str, fmt).strftime('%d/%m/%Y')
+        except:
+            continue
+    
+    return None
+
+def fetch_inquiries(date_str, phone_number):
+    """Fetch inquiries for a specific date"""
+    try:
+        # Check authorization
+        if not is_authorized(phone_number):
+            return "🚫 **Access Denied**\\n\\nYou are not authorized to view inquiries."
+        
+        # Parse date
+        target_date = parse_date(date_str)
+        if not target_date:
+            return f"❌ Invalid date format. Please use: DD/MM/YYYY or DD-MM-YYYY"
+        
+        # Get Google Sheets client
+        client = get_google_sheets_client()
+        if not client:
+            return "❌ Unable to connect to inquiry system. Please try again later."
+        
+        # Open sheet
+        sheet = client.open_by_key(INQUIRY_SHEET_ID).worksheet(INQUIRY_SHEET_NAME)
+        all_data = sheet.get_all_values()
+        
+        # Find inquiries for the date
+        inquiries = []
+        for row in all_data[1:]:  # Skip header
+            if len(row) >= 5 and row[0] == target_date:
+                inquiries.append({
+                    'company': row[3] if len(row) > 3 else 'N/A',
+                    'inquiry_link': row[4] if len(row) > 4 else 'N/A',
+                    'quotation': row[5] if len(row) > 5 else 'N/A'
+                })
+        
+        if not inquiries:
+            return f"📭 No inquiries found for **{target_date}**"
+        
+        # Format response
+        response = f"📋 **Inquiries for {target_date}**\\n\\n"
+        for i, inq in enumerate(inquiries, 1):
+            response += f"{i}. **{inq['company']}**\\n"
+            if inq['inquiry_link'] != 'N/A':
+                response += f"   📄 [Inquiry]({inq['inquiry_link']})\\n"
+            if inq['quotation'] != 'N/A':
+                response += f"   💰 [Quotation]({inq['quotation']})\\n"
+            response += "\\n"
+        
+        return response
+    
+    except Exception as e:
+        logger.error(f"Error fetching inquiries: {e}")
+        return f"❌ Error fetching inquiries: {str(e)}"
 
 def search_inventory_flexible(query):
     """Flexible inventory search that extracts size, grade, shape from natural language"""
@@ -135,23 +233,34 @@ def format_stock_response(results):
     if not results:
         return None
     
-    response = f"✅ **Found {len(results)} item(s):**\n\n"
+    response = f"✅ **Found {len(results)} item(s):**\\n\\n"
     for item in results[:5]:
-        response += f"📍 **{item['location']}**: {item['size']}mm {item['grade']} {item['shape']} - {int(item['weight'])} kgs ({item['quality']})\n"
-        response += f"   _Last updated: {item['last_updated']}_\n\n"
+        response += f"📍 **{item['location']}**: {item['size']}mm {item['grade']} {item['shape']} - {int(item['weight'])} kgs ({item['quality']})\\n"
+        response += f"   _Last updated: {item['last_updated']}_\\n\\n"
     
     if len(results) > 5:
-        response += f"_...and {len(results) - 5} more results_\n"
+        response += f"_...and {len(results) - 5} more results_\\n"
     
     return response
 
-def handle_message(text):
+def handle_message(text, phone_number=None):
     """Handle regular messages"""
     text_lower = text.lower().strip()
     
+    # Check for inquiry commands
+    inquiry_match = re.search(r'inquir(?:y|ies).*?(\d{1,2}[/-]\d{1,2}[/-]\d{2,4})', text_lower)
+    if inquiry_match:
+        date_str = inquiry_match.group(1)
+        return fetch_inquiries(date_str, phone_number)
+    
+    # Check for "today inquiries"
+    if 'today' in text_lower and 'inquir' in text_lower:
+        today = datetime.now().strftime('%d/%m/%Y')
+        return fetch_inquiries(today, phone_number)
+    
     # Greetings
     if text_lower in ['hi', 'hello', 'hey', 'namaste']:
-        return "👋 Hello! Welcome to **Reliable Alloys**!\n\nI can help you check stock availability. Try asking:\n• *50mm 304L*\n• *40mm EN36C round*\n• *17.5mm 303*\n\nWhat are you looking for?"
+        return "👋 Hello! Welcome to **Reliable Alloys**!\\n\\nI can help you with:\\n\\n✅ Stock availability\\n✅ Inquiries (authorized users)\\n\\n**Try:**\\n• *50mm 304L*\\n• *inquiries 28/12/2025*\\n• *today inquiries*\\n\\nWhat can I help you with?"
     
     # Search inventory
     results = search_inventory_flexible(text)
@@ -159,7 +268,7 @@ def handle_message(text):
     if results:
         return format_stock_response(results)
     else:
-        return f"❌ No exact matches found for '{text}'.\n\nPlease contact us at **{COMPANY_INFO['contact']}** for assistance.\n\nTry searching with: *size + grade* (e.g., '50mm 304L')"
+        return f"❌ No exact matches found for '{text}'.\\n\\nPlease contact us at **{COMPANY_INFO['contact']}** for assistance.\\n\\nTry searching with: *size + grade* (e.g., '50mm 304L')"
 
 def send_message(chat_id, text):
     """Send message via Telegram API"""
@@ -190,6 +299,13 @@ def webhook():
             chat_id = message['chat']['id']
             text = message.get('text', '')
             
+            # Get phone number if available
+            phone_number = None
+            if 'from' in message and 'phone_number' in message['from']:
+                phone_number = message['from']['phone_number']
+            elif 'contact' in message:
+                phone_number = message['contact']['phone_number']
+            
             # Check if message was already processed
             if is_message_processed(message_id):
                 logger.info(f"Message {message_id} already processed, skipping")
@@ -197,13 +313,13 @@ def webhook():
             
             # Handle commands
             if text.startswith('/start'):
-                response = "🏭 **Welcome to Reliable Alloys!**\n\nI can help you with:\n\n✅ Stock availability across all locations\n\n**Our Locations:**\n• PARTH • WADA • TALOJA\n• SRG • SHEETS • RELIABLE ALLOYS\n\n**Try:**\n• *50mm 304L*\n• *40mm EN36C*\n\nWhat can I help you with?"
+                response = "🏭 **Welcome to Reliable Alloys!**\\n\\nI can help you with:\\n\\n✅ Stock availability across all locations\\n✅ Inquiries & Quotations (authorized users)\\n\\n**Our Locations:**\\n• PARTH • WADA • TALOJA\\n• SRG • SHEETS • RELIABLE ALLOYS\\n\\n**Try:**\\n• *50mm 304L*\\n• *inquiries 28/12/2025*\\n• *today inquiries*\\n\\nWhat can I help you with?"
             elif text.startswith('/refresh'):
                 global INVENTORY
                 INVENTORY = load_inventory()
                 response = "✅ Inventory refreshed!"
             else:
-                response = handle_message(text)
+                response = handle_message(text, phone_number)
             
             send_message(chat_id, response)
         
@@ -215,7 +331,7 @@ def webhook():
 @app.route('/')
 def index():
     """Health check endpoint"""
-    return 'Stock Bot is running! 🚀'
+    return 'Stock Bot with Inquiry System is running! 🚀'
 
 @app.route('/health')
 def health():
@@ -225,7 +341,8 @@ def health():
         'status': 'healthy',
         'bot': 'stock-bot',
         'inventory_items': inventory_count,
-        'locations': list(INVENTORY.keys())
+        'locations': list(INVENTORY.keys()),
+        'inquiry_system': 'enabled'
     })
 
 @app.route('/inventory')
@@ -236,4 +353,5 @@ def get_inventory():
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 8080))
     logger.info(f"Starting bot with {sum(len(sizes) for sizes in INVENTORY.values())} inventory items")
+    logger.info(f"Inquiry system enabled for {len(AUTHORIZED_NUMBERS)} authorized numbers")
     app.run(host='0.0.0.0', port=port)
