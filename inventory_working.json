@@ -5,9 +5,54 @@
         {"shape": "Round", "quality": "Black", "weight": 3763}
       ]
     },
+    "26": {
+      "304L": [
+        {"shape": "Round", "quality": "Black", "weight": 2555}
+      ]
+    },
     "28.5": {
       "304L": [
         {"shape": "Round", "quality": "Black", "weight": 1733}
+      ]
+    },
+    "30": {
+      "304L": [
+        {"shape": "Round", "quality": "Black", "weight": 70}
+      ]
+    },
+    "32": {
+      "304L": [
+        {"shape": "Round", "quality": "Black", "weight": 4460}
+      ]
+    },
+    "34": {
+      "304L": [
+        {"shape": "Round", "quality": "Black", "weight": 1189}
+      ]
+    },
+    "36": {
+      "304L": [
+        {"shape": "Round", "quality": "Black", "weight": 3330}
+      ]
+    },
+    "38": {
+      "304L": [
+        {"shape": "Round", "quality": "Black", "weight": 1345}
+      ]
+    },
+    "40": {
+      "304L": [
+        {"shape": "Round", "quality": "Black", "weight": 3612}
+      ]
+    },
+    "42": {
+      "304L": [
+        {"shape": "Round", "quality": "Black", "weight": 167}
+      ]
+    },
+    "45": {
+      "304L": [
+        {"shape": "Round", "quality": "Black", "weight": 725}
       ]
     },
     "50": {
@@ -20,6 +65,66 @@
       "304L": [
         {"shape": "Round", "quality": "Black", "weight": 3030},
         {"shape": "Round", "quality": "Export", "weight": 635.9}
+      ]
+    },
+    "58": {
+      "304L": [
+        {"shape": "Round", "quality": "Black", "weight": 3707}
+      ]
+    },
+    "60": {
+      "304L": [
+        {"shape": "Round", "quality": "Black", "weight": 190}
+      ]
+    },
+    "70": {
+      "304L": [
+        {"shape": "Round", "quality": "Black", "weight": 356}
+      ]
+    },
+    "73": {
+      "304L": [
+        {"shape": "Round", "quality": "Black", "weight": 85}
+      ]
+    },
+    "83": {
+      "304L": [
+        {"shape": "Round", "quality": "Black", "weight": 981}
+      ]
+    },
+    "95": {
+      "304L": [
+        {"shape": "Round", "quality": "Black", "weight": 2670}
+      ]
+    },
+    "100": {
+      "304L": [
+        {"shape": "Round", "quality": "Black", "weight": 3160}
+      ]
+    },
+    "110": {
+      "304L": [
+        {"shape": "Round", "quality": "Black", "weight": 414}
+      ]
+    },
+    "115": {
+      "304L": [
+        {"shape": "Round", "quality": "Black", "weight": 496}
+      ]
+    },
+    "125": {
+      "304L": [
+        {"shape": "Round", "quality": "Black", "weight": 5542}
+      ]
+    },
+    "130": {
+      "304L": [
+        {"shape": "Round", "quality": "Black", "weight": 627}
+      ]
+    },
+    "145": {
+      "304L": [
+        {"shape": "Round", "quality": "Black", "weight": 1729}
       ]
     },
     "150": {
@@ -35,6 +140,11 @@
     "TURNING 304": {
       "SCRAP": [
         {"shape": "SCRAP", "quality": "304", "weight": 14559}
+      ]
+    },
+    "TURNING 316": {
+      "SCRAP": [
+        {"shape": "SCRAP", "quality": "316", "weight": 10158.5}
       ]
     }
   },
@@ -57,6 +167,28 @@
     "50": {
       "304L": [
         {"shape": "Round", "quality": "Hard", "weight": 1300}
+      ]
+    },
+    "MS SCRAP": {
+      "SCRAP": [
+        {"shape": "SCRAP", "quality": "MS FITTINGS", "weight": 6640}
+      ]
+    }
+  },
+  "TALOJA": {
+    "ENDCUT 316L": {
+      "SCRAP": [
+        {"shape": "SCRAP", "quality": "316L", "weight": 958}
+      ]
+    },
+    "TURNING 316": {
+      "SCRAP": [
+        {"shape": "SCRAP", "quality": "316", "weight": 67}
+      ]
+    },
+    "TURNING 304": {
+      "SCRAP": [
+        {"shape": "SCRAP", "quality": "304", "weight": 3334}
       ]
     }
   }
