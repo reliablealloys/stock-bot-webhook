@@ -1,0 +1,63 @@
+{
+  "WADA": {
+    "25": {
+      "304L": [
+        {"shape": "Round", "quality": "Black", "weight": 3763}
+      ]
+    },
+    "28.5": {
+      "304L": [
+        {"shape": "Round", "quality": "Black", "weight": 1733}
+      ]
+    },
+    "50": {
+      "304L": [
+        {"shape": "Round", "quality": "Black", "weight": 2749},
+        {"shape": "Round", "quality": "Export", "weight": 125.2}
+      ]
+    },
+    "56": {
+      "304L": [
+        {"shape": "Round", "quality": "Black", "weight": 3030},
+        {"shape": "Round", "quality": "Export", "weight": 635.9}
+      ]
+    },
+    "150": {
+      "304L": [
+        {"shape": "Round", "quality": "Black", "weight": 3613}
+      ]
+    },
+    "MIX HEX": {
+      "SCRAP": [
+        {"shape": "SCRAP", "quality": "PICKLED", "weight": 1350}
+      ]
+    },
+    "TURNING 304": {
+      "SCRAP": [
+        {"shape": "SCRAP", "quality": "304", "weight": 14559}
+      ]
+    }
+  },
+  "PARTH": {
+    "6": {
+      "304L": [
+        {"shape": "Round", "quality": "Black Coil", "weight": 2975}
+      ],
+      "316L": [
+        {"shape": "Round", "quality": "Black Coil", "weight": 1157}
+      ]
+    },
+    "28.5": {
+      "316L": [
+        {"shape": "Hex", "quality": "Black Ann", "weight": 473}
+      ]
+    }
+  },
+  "SRG": {
+    "50": {
+      "304L": [
+        {"shape": "Round", "quality": "Hard", "weight": 1300}
+      ]
+    }
+  }
+}
