@@ -1,0 +1,27 @@
+"""
+Add /fix command to main.py
+
+This adds a Telegram command that runs all fixes when you type /fix
+"""
+
+# Add this to the command handling section in main.py (around line 230)
+
+elif text.startswith('/fix'):
+    try:
+        # Run one_click_fix
+        import subprocess
+        result = subprocess.run(['python3', 'one_click_fix.py'], 
+                              capture_output=True, text=True, timeout=30)
+        
+        # Reload inventory
+        global INVENTORY
+        INVENTORY = load_inventory()
+        
+        response = f"✅ FIX APPLIED!\\n\\n"
+        response += f"Loaded {len(INVENTORY)} locations\\n"
+        response += f"\\nTest: scrap, 8mm 304l, planning"
+        
+        logger.info(f"Fix output: {result.stdout}")
+    except Exception as e:
+        response = f"❌ Error: {str(e)}"
+        logger.error(f"Fix error: {e}")
