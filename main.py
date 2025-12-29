@@ -6,15 +6,6 @@ import re
 import json
 from datetime import datetime, timedelta
 
-# Try to import Google Sheets libraries (optional)
-try:
-    import gspread
-    from oauth2client.service_account import ServiceAccountCredentials
-    GOOGLE_SHEETS_AVAILABLE = True
-except ImportError:
-    GOOGLE_SHEETS_AVAILABLE = False
-    logging.warning("Google Sheets libraries not available - inquiry system disabled")
-
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
@@ -22,11 +13,6 @@ app = Flask(__name__)
 
 BOT_TOKEN = os.environ.get('BOT_TOKEN', '8023224003:AAHNGp6QxZRfawYQn75Ww4_9OORFJhAJeCs')
 TELEGRAM_API = f'https://api.telegram.org/bot{BOT_TOKEN}'
-
-# Inquiry system configuration
-INQUIRY_SHEET_ID = '1lI9c24H2Jg6DOMAOcJuzYXuTLNjc1FIdOPs507oM5ts'
-INQUIRY_SHEET_NAME = 'DEMO LINKS'
-AUTHORIZED_NUMBERS = ['9831935522']  # Add more authorized numbers here
 
 # Company information
 COMPANY_INFO = {
@@ -50,8 +36,14 @@ LAST_UPDATED = {
 def load_inventory():
     """Load inventory from inventory.json file"""
     try:
+        if not os.path.exists('inventory.json'):
+            logger.error("inventory.json not found!")
+            return {}
+        
         with open('inventory.json', 'r') as f:
-            return json.load(f)
+            data = json.load(f)
+            logger.info(f"Loaded inventory with {len(data)} locations")
+            return data
     except Exception as e:
         logger.error(f"Error loading inventory: {e}")
         return {}
@@ -82,110 +74,11 @@ def is_message_processed(message_id):
     processed_messages[message_id] = current_time
     return False
 
-def get_google_sheets_client():
-    """Initialize Google Sheets client"""
-    if not GOOGLE_SHEETS_AVAILABLE:
-        return None
-    
-    try:
-        # Get credentials from environment variable
-        creds_json = os.environ.get('GOOGLE_SHEETS_CREDENTIALS')
-        if not creds_json:
-            logger.error("GOOGLE_SHEETS_CREDENTIALS not found")
-            return None
-        
-        creds_dict = json.loads(creds_json)
-        scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
-        creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
-        return gspread.authorize(creds)
-    except Exception as e:
-        logger.error(f"Error initializing Google Sheets: {e}")
-        return None
-
-def is_authorized(phone_number):
-    """Check if phone number is authorized"""
-    if not phone_number:
-        return False
-    
-    # Remove any formatting from phone number
-    clean_number = re.sub(r'[^\d]', '', str(phone_number))
-    
-    for auth_number in AUTHORIZED_NUMBERS:
-        clean_auth = re.sub(r'[^\d]', '', str(auth_number))
-        if clean_number.endswith(clean_auth) or clean_auth.endswith(clean_number):
-            return True
-    return False
-
-def parse_date(date_str):
-    """Parse date from various formats"""
-    # Try different date formats
-    formats = ['%d/%m/%Y', '%d-%m-%Y', '%d/%m/%y', '%d-%m-%y']
-    
-    for fmt in formats:
-        try:
-            return datetime.strptime(date_str, fmt).strftime('%d/%m/%Y')
-        except:
-            continue
-    
-    return None
-
-def fetch_inquiries(date_str, phone_number):
-    """Fetch inquiries for a specific date"""
-    
-    # Check if Google Sheets is available
-    if not GOOGLE_SHEETS_AVAILABLE:
-        return "❌ **Inquiry system is currently unavailable**\\n\\nGoogle Sheets integration is not configured. Please contact admin."
-    
-    try:
-        # Check authorization
-        if not is_authorized(phone_number):
-            return "🚫 **Access Denied**\\n\\nYou are not authorized to view inquiries.\\n\\nPlease share your contact to verify authorization."
-        
-        # Parse date
-        target_date = parse_date(date_str)
-        if not target_date:
-            return f"❌ Invalid date format. Please use: DD/MM/YYYY or DD-MM-YYYY"
-        
-        # Get Google Sheets client
-        client = get_google_sheets_client()
-        if not client:
-            return "❌ Unable to connect to inquiry system. Please try again later."
-        
-        # Open sheet
-        sheet = client.open_by_key(INQUIRY_SHEET_ID).worksheet(INQUIRY_SHEET_NAME)
-        all_data = sheet.get_all_values()
-        
-        # Find inquiries for the date
-        inquiries = []
-        for row in all_data[1:]:  # Skip header
-            if len(row) >= 5 and row[0] == target_date:
-                inquiries.append({
-                    'company': row[3] if len(row) > 3 else 'N/A',
-                    'inquiry_link': row[4] if len(row) > 4 else 'N/A',
-                    'quotation': row[5] if len(row) > 5 else 'N/A'
-                })
-        
-        if not inquiries:
-            return f"📭 No inquiries found for **{target_date}**"
-        
-        # Format response
-        response = f"📋 **Inquiries for {target_date}**\\n\\n"
-        for i, inq in enumerate(inquiries, 1):
-            response += f"{i}. **{inq['company']}**\\n"
-            if inq['inquiry_link'] != 'N/A':
-                response += f"   📄 [Inquiry]({inq['inquiry_link']})\\n"
-            if inq['quotation'] != 'N/A':
-                response += f"   💰 [Quotation]({inq['quotation']})\\n"
-            response += "\\n"
-        
-        return response
-    
-    except Exception as e:
-        logger.error(f"Error fetching inquiries: {e}")
-        return f"❌ Error fetching inquiries: {str(e)}"
-
 def search_inventory_flexible(query):
     """Flexible inventory search that extracts size, grade, shape from natural language"""
+    if not INVENTORY:
+        return []
+    
     query_lower = query.lower()
     
     # Extract size
@@ -214,35 +107,50 @@ def search_inventory_flexible(query):
     
     # Search inventory
     results = []
-    for location, sizes in INVENTORY.items():
-        for inv_size, grades in sizes.items():
-            # Match size
-            if size and str(inv_size) != str(size):
+    try:
+        for location, sizes in INVENTORY.items():
+            if not isinstance(sizes, dict):
                 continue
-            
-            for inv_grade, items in grades.items():
-                # Match grade
-                if grade and inv_grade != grade:
+                
+            for inv_size, grades in sizes.items():
+                # Match size
+                if size and str(inv_size) != str(size):
                     continue
                 
-                if isinstance(items, dict):
-                    items = [items]
+                if not isinstance(grades, dict):
+                    continue
                 
-                for item in items:
-                    # Match shape
-                    if shape and shape.lower() not in item['shape'].lower():
+                for inv_grade, items in grades.items():
+                    # Match grade
+                    if grade and inv_grade != grade:
                         continue
                     
-                    if item['weight'] > 0:
-                        results.append({
-                            'location': location,
-                            'size': inv_size,
-                            'grade': inv_grade,
-                            'shape': item['shape'],
-                            'quality': item['quality'],
-                            'weight': item['weight'],
-                            'last_updated': LAST_UPDATED.get(location, 'Unknown')
-                        })
+                    if isinstance(items, dict):
+                        items = [items]
+                    
+                    if not isinstance(items, list):
+                        continue
+                    
+                    for item in items:
+                        if not isinstance(item, dict):
+                            continue
+                        
+                        # Match shape
+                        if shape and shape.lower() not in item.get('shape', '').lower():
+                            continue
+                        
+                        if item.get('weight', 0) > 0:
+                            results.append({
+                                'location': location,
+                                'size': inv_size,
+                                'grade': inv_grade,
+                                'shape': item.get('shape', 'Unknown'),
+                                'quality': item.get('quality', 'Unknown'),
+                                'weight': item.get('weight', 0),
+                                'last_updated': LAST_UPDATED.get(location, 'Unknown')
+                            })
+    except Exception as e:
+        logger.error(f"Error searching inventory: {e}")
     
     return results
 
@@ -261,25 +169,13 @@ def format_stock_response(results):
     
     return response
 
-def handle_message(text, phone_number=None):
+def handle_message(text):
     """Handle regular messages"""
     text_lower = text.lower().strip()
     
-    # Check for inquiry commands
-    inquiry_match = re.search(r'inquir(?:y|ies).*?(\d{1,2}[/-]\d{1,2}[/-]\d{2,4})', text_lower)
-    if inquiry_match:
-        date_str = inquiry_match.group(1)
-        return fetch_inquiries(date_str, phone_number)
-    
-    # Check for "today inquiries"
-    if 'today' in text_lower and 'inquir' in text_lower:
-        today = datetime.now().strftime('%d/%m/%Y')
-        return fetch_inquiries(today, phone_number)
-    
     # Greetings
     if text_lower in ['hi', 'hello', 'hey', 'namaste']:
-        inquiry_status = "✅ Inquiries (authorized users)" if GOOGLE_SHEETS_AVAILABLE else "⚠️ Inquiries (unavailable)"
-        return f"👋 Hello! Welcome to **Reliable Alloys**!\\n\\nI can help you with:\\n\\n✅ Stock availability\\n{inquiry_status}\\n\\n**Try:**\\n• *50mm 304L*\\n• *6mm 304L*\\n• *inquiries 28/12/2025* (if authorized)\\n\\nWhat can I help you with?"
+        return "👋 Hello! Welcome to **Reliable Alloys**!\\n\\nI can help you check stock availability.\\n\\n**Try:**\\n• *50mm 304L*\\n• *6mm 304L*\\n• *40mm EN36C*\\n\\nWhat are you looking for?"
     
     # Search inventory
     results = search_inventory_flexible(text)
@@ -318,16 +214,6 @@ def webhook():
             chat_id = message['chat']['id']
             text = message.get('text', '')
             
-            # Get phone number if available
-            phone_number = None
-            if 'from' in message:
-                # Try to get phone from contact
-                if 'contact' in message and message['contact'].get('user_id') == message['from']['id']:
-                    phone_number = message['contact'].get('phone_number')
-                # Or from user profile (if shared)
-                elif 'phone_number' in message['from']:
-                    phone_number = message['from']['phone_number']
-            
             # Check if message was already processed
             if is_message_processed(message_id):
                 logger.info(f"Message {message_id} already processed, skipping")
@@ -335,14 +221,13 @@ def webhook():
             
             # Handle commands
             if text.startswith('/start'):
-                inquiry_status = "✅ Inquiries & Quotations (authorized users)" if GOOGLE_SHEETS_AVAILABLE else "⚠️ Inquiries (unavailable - setup required)"
-                response = f"🏭 **Welcome to Reliable Alloys!**\\n\\nI can help you with:\\n\\n✅ Stock availability across all locations\\n{inquiry_status}\\n\\n**Our Locations:**\\n• PARTH • WADA • TALOJA\\n• SRG • SHEETS • RELIABLE ALLOYS\\n\\n**Try:**\\n• *50mm 304L*\\n• *6mm 304L*\\n• *inquiries 28/12/2025* (if authorized)\\n\\nWhat can I help you with?"
+                response = "🏭 **Welcome to Reliable Alloys!**\\n\\nI can help you check stock availability across all locations.\\n\\n**Our Locations:**\\n• PARTH • WADA • TALOJA\\n• SRG • SHEETS • RELIABLE ALLOYS\\n\\n**Try:**\\n• *50mm 304L*\\n• *6mm 304L*\\n• *40mm EN36C*\\n\\nWhat can I help you with?"
             elif text.startswith('/refresh'):
                 global INVENTORY
                 INVENTORY = load_inventory()
-                response = "✅ Inventory refreshed!"
+                response = f"✅ Inventory refreshed! Loaded {len(INVENTORY)} locations."
             else:
-                response = handle_message(text, phone_number)
+                response = handle_message(text)
             
             send_message(chat_id, response)
         
@@ -354,20 +239,18 @@ def webhook():
 @app.route('/')
 def index():
     """Health check endpoint"""
-    inquiry_status = "enabled" if GOOGLE_SHEETS_AVAILABLE else "disabled (libraries not installed)"
-    return f'Stock Bot is running! 🚀\\nInquiry system: {inquiry_status}'
+    return f'Stock Bot is running! 🚀\\nInventory locations: {len(INVENTORY)}'
 
 @app.route('/health')
 def health():
     """Health check for Railway"""
-    inventory_count = sum(len(sizes) for sizes in INVENTORY.values())
+    inventory_count = sum(len(sizes) for sizes in INVENTORY.values()) if INVENTORY else 0
     return jsonify({
         'status': 'healthy',
         'bot': 'stock-bot',
         'inventory_items': inventory_count,
-        'locations': list(INVENTORY.keys()),
-        'inquiry_system': 'enabled' if GOOGLE_SHEETS_AVAILABLE else 'disabled',
-        'google_sheets_available': GOOGLE_SHEETS_AVAILABLE
+        'locations': list(INVENTORY.keys()) if INVENTORY else [],
+        'inventory_loaded': len(INVENTORY) > 0
     })
 
 @app.route('/inventory')
@@ -377,10 +260,10 @@ def get_inventory():
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 8080))
-    logger.info(f"Starting bot with {sum(len(sizes) for sizes in INVENTORY.values())} inventory items")
-    logger.info(f"Google Sheets available: {GOOGLE_SHEETS_AVAILABLE}")
-    if GOOGLE_SHEETS_AVAILABLE:
-        logger.info(f"Inquiry system enabled for {len(AUTHORIZED_NUMBERS)} authorized numbers")
+    logger.info(f"Starting bot...")
+    logger.info(f"Inventory loaded: {len(INVENTORY)} locations")
+    if INVENTORY:
+        logger.info(f"Total items: {sum(len(sizes) for sizes in INVENTORY.values())}")
     else:
-        logger.warning("Inquiry system disabled - Google Sheets libraries not available")
+        logger.warning("No inventory loaded - check inventory.json file")
     app.run(host='0.0.0.0', port=port)
