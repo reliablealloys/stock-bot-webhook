@@ -5,8 +5,15 @@ import requests
 import re
 import json
 from datetime import datetime, timedelta
-import gspread
-from oauth2client.service_account import ServiceAccountCredentials
+
+# Try to import Google Sheets libraries (optional)
+try:
+    import gspread
+    from oauth2client.service_account import ServiceAccountCredentials
+    GOOGLE_SHEETS_AVAILABLE = True
+except ImportError:
+    GOOGLE_SHEETS_AVAILABLE = False
+    logging.warning("Google Sheets libraries not available - inquiry system disabled")
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -77,6 +84,9 @@ def is_message_processed(message_id):
 
 def get_google_sheets_client():
     """Initialize Google Sheets client"""
+    if not GOOGLE_SHEETS_AVAILABLE:
+        return None
+    
     try:
         # Get credentials from environment variable
         creds_json = os.environ.get('GOOGLE_SHEETS_CREDENTIALS')
@@ -94,6 +104,9 @@ def get_google_sheets_client():
 
 def is_authorized(phone_number):
     """Check if phone number is authorized"""
+    if not phone_number:
+        return False
+    
     # Remove any formatting from phone number
     clean_number = re.sub(r'[^\d]', '', str(phone_number))
     
@@ -118,10 +131,15 @@ def parse_date(date_str):
 
 def fetch_inquiries(date_str, phone_number):
     """Fetch inquiries for a specific date"""
+    
+    # Check if Google Sheets is available
+    if not GOOGLE_SHEETS_AVAILABLE:
+        return "❌ **Inquiry system is currently unavailable**\\n\\nGoogle Sheets integration is not configured. Please contact admin."
+    
     try:
         # Check authorization
         if not is_authorized(phone_number):
-            return "🚫 **Access Denied**\\n\\nYou are not authorized to view inquiries."
+            return "🚫 **Access Denied**\\n\\nYou are not authorized to view inquiries.\\n\\nPlease share your contact to verify authorization."
         
         # Parse date
         target_date = parse_date(date_str)
@@ -260,7 +278,8 @@ def handle_message(text, phone_number=None):
     
     # Greetings
     if text_lower in ['hi', 'hello', 'hey', 'namaste']:
-        return "👋 Hello! Welcome to **Reliable Alloys**!\\n\\nI can help you with:\\n\\n✅ Stock availability\\n✅ Inquiries (authorized users)\\n\\n**Try:**\\n• *50mm 304L*\\n• *inquiries 28/12/2025*\\n• *today inquiries*\\n\\nWhat can I help you with?"
+        inquiry_status = "✅ Inquiries (authorized users)" if GOOGLE_SHEETS_AVAILABLE else "⚠️ Inquiries (unavailable)"
+        return f"👋 Hello! Welcome to **Reliable Alloys**!\\n\\nI can help you with:\\n\\n✅ Stock availability\\n{inquiry_status}\\n\\n**Try:**\\n• *50mm 304L*\\n• *6mm 304L*\\n• *inquiries 28/12/2025* (if authorized)\\n\\nWhat can I help you with?"
     
     # Search inventory
     results = search_inventory_flexible(text)
@@ -301,10 +320,13 @@ def webhook():
             
             # Get phone number if available
             phone_number = None
-            if 'from' in message and 'phone_number' in message['from']:
-                phone_number = message['from']['phone_number']
-            elif 'contact' in message:
-                phone_number = message['contact']['phone_number']
+            if 'from' in message:
+                # Try to get phone from contact
+                if 'contact' in message and message['contact'].get('user_id') == message['from']['id']:
+                    phone_number = message['contact'].get('phone_number')
+                # Or from user profile (if shared)
+                elif 'phone_number' in message['from']:
+                    phone_number = message['from']['phone_number']
             
             # Check if message was already processed
             if is_message_processed(message_id):
@@ -313,7 +335,8 @@ def webhook():
             
             # Handle commands
             if text.startswith('/start'):
-                response = "🏭 **Welcome to Reliable Alloys!**\\n\\nI can help you with:\\n\\n✅ Stock availability across all locations\\n✅ Inquiries & Quotations (authorized users)\\n\\n**Our Locations:**\\n• PARTH • WADA • TALOJA\\n• SRG • SHEETS • RELIABLE ALLOYS\\n\\n**Try:**\\n• *50mm 304L*\\n• *inquiries 28/12/2025*\\n• *today inquiries*\\n\\nWhat can I help you with?"
+                inquiry_status = "✅ Inquiries & Quotations (authorized users)" if GOOGLE_SHEETS_AVAILABLE else "⚠️ Inquiries (unavailable - setup required)"
+                response = f"🏭 **Welcome to Reliable Alloys!**\\n\\nI can help you with:\\n\\n✅ Stock availability across all locations\\n{inquiry_status}\\n\\n**Our Locations:**\\n• PARTH • WADA • TALOJA\\n• SRG • SHEETS • RELIABLE ALLOYS\\n\\n**Try:**\\n• *50mm 304L*\\n• *6mm 304L*\\n• *inquiries 28/12/2025* (if authorized)\\n\\nWhat can I help you with?"
             elif text.startswith('/refresh'):
                 global INVENTORY
                 INVENTORY = load_inventory()
@@ -331,7 +354,8 @@ def webhook():
 @app.route('/')
 def index():
     """Health check endpoint"""
-    return 'Stock Bot with Inquiry System is running! 🚀'
+    inquiry_status = "enabled" if GOOGLE_SHEETS_AVAILABLE else "disabled (libraries not installed)"
+    return f'Stock Bot is running! 🚀\\nInquiry system: {inquiry_status}'
 
 @app.route('/health')
 def health():
@@ -342,7 +366,8 @@ def health():
         'bot': 'stock-bot',
         'inventory_items': inventory_count,
         'locations': list(INVENTORY.keys()),
-        'inquiry_system': 'enabled'
+        'inquiry_system': 'enabled' if GOOGLE_SHEETS_AVAILABLE else 'disabled',
+        'google_sheets_available': GOOGLE_SHEETS_AVAILABLE
     })
 
 @app.route('/inventory')
@@ -353,5 +378,9 @@ def get_inventory():
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 8080))
     logger.info(f"Starting bot with {sum(len(sizes) for sizes in INVENTORY.values())} inventory items")
-    logger.info(f"Inquiry system enabled for {len(AUTHORIZED_NUMBERS)} authorized numbers")
+    logger.info(f"Google Sheets available: {GOOGLE_SHEETS_AVAILABLE}")
+    if GOOGLE_SHEETS_AVAILABLE:
+        logger.info(f"Inquiry system enabled for {len(AUTHORIZED_NUMBERS)} authorized numbers")
+    else:
+        logger.warning("Inquiry system disabled - Google Sheets libraries not available")
     app.run(host='0.0.0.0', port=port)
