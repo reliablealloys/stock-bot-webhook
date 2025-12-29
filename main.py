@@ -196,22 +196,16 @@ def send_message(chat_id, text):
     }
     try:
         response = requests.post(url, json=data, timeout=10)
+        logger.info(f"Sent message to {chat_id}: {response.status_code}")
         return response.json()
     except Exception as e:
         logger.error(f"Error sending message: {e}")
         return None
 
-@app.route('/<path:token>', methods=['POST'])
-def webhook(token):
-    """Handle incoming webhook updates - accepts any path"""
+def process_update(update):
+    """Process incoming update"""
     try:
-        # Verify token matches
-        if token != BOT_TOKEN:
-            logger.warning(f"Invalid token received: {token}")
-            return jsonify({'ok': False, 'error': 'Invalid token'}), 403
-        
-        update = request.get_json()
-        logger.info(f"Received update: {update}")
+        logger.info(f"Processing update: {json.dumps(update)}")
         
         if 'message' in update:
             message = update['message']
@@ -219,10 +213,12 @@ def webhook(token):
             chat_id = message['chat']['id']
             text = message.get('text', '')
             
+            logger.info(f"Message {message_id} from {chat_id}: {text}")
+            
             # Check if message was already processed
             if is_message_processed(message_id):
                 logger.info(f"Message {message_id} already processed, skipping")
-                return jsonify({'ok': True})
+                return {'ok': True}
             
             # Handle commands
             if text.startswith('/start'):
@@ -234,19 +230,41 @@ def webhook(token):
             else:
                 response = handle_message(text)
             
+            logger.info(f"Sending response: {response[:100]}...")
             send_message(chat_id, response)
         
-        return jsonify({'ok': True})
+        return {'ok': True}
     except Exception as e:
-        logger.error(f"Error processing webhook: {e}")
+        logger.error(f"Error processing update: {e}", exc_info=True)
+        return {'ok': False, 'error': str(e)}
+
+# Webhook endpoint - catch all POST requests
+@app.route('/', methods=['POST'], defaults={'path': ''})
+@app.route('/<path:path>', methods=['POST'])
+def webhook(path):
+    """Handle incoming webhook updates - accepts any path"""
+    try:
+        logger.info(f"Webhook called with path: /{path}")
+        logger.info(f"Request headers: {dict(request.headers)}")
+        
+        update = request.get_json()
+        if not update:
+            logger.error("No JSON data received")
+            return jsonify({'ok': False, 'error': 'No data'}), 400
+        
+        result = process_update(update)
+        return jsonify(result)
+        
+    except Exception as e:
+        logger.error(f"Webhook error: {e}", exc_info=True)
         return jsonify({'ok': False, 'error': str(e)}), 500
 
-@app.route('/')
+@app.route('/', methods=['GET'])
 def index():
     """Health check endpoint"""
-    return f'Stock Bot is running! 🚀\\nInventory locations: {len(INVENTORY)}'
+    return f'Stock Bot is running! 🚀<br>Inventory locations: {len(INVENTORY)}<br>Bot token configured: {BOT_TOKEN[:20]}...'
 
-@app.route('/health')
+@app.route('/health', methods=['GET'])
 def health():
     """Health check for Railway"""
     inventory_count = sum(len(sizes) for sizes in INVENTORY.values()) if INVENTORY else 0
@@ -255,21 +273,26 @@ def health():
         'bot': 'stock-bot',
         'inventory_items': inventory_count,
         'locations': list(INVENTORY.keys()) if INVENTORY else [],
-        'inventory_loaded': len(INVENTORY) > 0
+        'inventory_loaded': len(INVENTORY) > 0,
+        'bot_token_set': bool(BOT_TOKEN)
     })
 
-@app.route('/inventory')
+@app.route('/inventory', methods=['GET'])
 def get_inventory():
     """API endpoint to get current inventory"""
     return jsonify(INVENTORY)
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 8080))
-    logger.info(f"Starting bot...")
+    logger.info("="*60)
+    logger.info("STARTING STOCK BOT")
+    logger.info("="*60)
     logger.info(f"Bot token: {BOT_TOKEN[:20]}...")
     logger.info(f"Inventory loaded: {len(INVENTORY)} locations")
     if INVENTORY:
         logger.info(f"Total items: {sum(len(sizes) for sizes in INVENTORY.values())}")
     else:
         logger.warning("No inventory loaded - check inventory.json file")
-    app.run(host='0.0.0.0', port=port)
+    logger.info(f"Starting server on port {port}")
+    logger.info("="*60)
+    app.run(host='0.0.0.0', port=port, debug=False)
