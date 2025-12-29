@@ -1,1 +1,1 @@
-web: cp inventory_test.json inventory.json && python3 add_scrap_search.py && gunicorn main:app --workers 1 --timeout 120 --log-level debug
+web: cp inventory_test.json inventory.json && python3 patch_scrap_search.py && gunicorn main:app --workers 1 --timeout 120 --log-level debug
