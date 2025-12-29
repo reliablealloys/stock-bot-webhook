@@ -3,7 +3,7 @@ COMPREHENSIVE WEIGHT FIX
 ========================
 
 This updates ALL known weights from the Google Sheets data.
-Fixes hundreds of items across all locations.
+Fixes hundreds of items across all locations INCLUDING SCRAP.
 
 Run in Railway: python3 comprehensive_fix.py
 """
@@ -17,6 +17,50 @@ def comprehensive_fix():
         data = json.load(f)
     
     fixes = 0
+    
+    # ===== ADD SCRAP ITEMS =====
+    print("\n📦 Adding SCRAP items...")
+    
+    # WADA Scrap
+    if 'WADA' not in data:
+        data['WADA'] = {}
+    
+    wada_scrap = {
+        'MIX HEX': {'SCRAP': [{'shape': 'SCRAP', 'quality': 'PICKLED', 'weight': 1350}]},
+        'MUDIYA': {'SCRAP': [{'shape': 'SCRAP', 'quality': '316', 'weight': 176}]},
+        'TURNING 304': {'SCRAP': [{'shape': 'SCRAP', 'quality': '304', 'weight': 14559}]},
+        'TURNING 316': {'SCRAP': [{'shape': 'SCRAP', 'quality': '316', 'weight': 10158.5}]}
+    }
+    
+    for item, details in wada_scrap.items():
+        data['WADA'][item] = details
+        weight = details['SCRAP'][0]['weight']
+        print(f"  ✅ WADA {item}: {weight} kg")
+        fixes += 1
+    
+    # SRG Scrap
+    if 'SRG' not in data:
+        data['SRG'] = {}
+    
+    data['SRG']['MS SCRAP'] = {'SCRAP': [{'shape': 'SCRAP', 'quality': 'MS FITTINGS', 'weight': 6640}]}
+    print(f"  ✅ SRG MS SCRAP: 6640 kg")
+    fixes += 1
+    
+    # TALOJA Scrap
+    if 'TALOJA' not in data:
+        data['TALOJA'] = {}
+    
+    taloja_scrap = {
+        'ENDCUT 316L': {'SCRAP': [{'shape': 'SCRAP', 'quality': '316L', 'weight': 958}]},
+        'TURNING 316': {'SCRAP': [{'shape': 'SCRAP', 'quality': '316', 'weight': 67}]},
+        'TURNING 304': {'SCRAP': [{'shape': 'SCRAP', 'quality': '304', 'weight': 3334}]}
+    }
+    
+    for item, details in taloja_scrap.items():
+        data['TALOJA'][item] = details
+        weight = details['SCRAP'][0]['weight']
+        print(f"  ✅ TALOJA {item}: {weight} kg")
+        fixes += 1
     
     # ===== SRG PIPES =====
     if 'SRG' in data:
@@ -90,7 +134,7 @@ def comprehensive_fix():
             '21': 1359,
             '22.2': 29,
             '26': 3263,
-            '27': 313,  # Black
+            '27': 313,
             '32': 1933,
             '33': 201
         }
@@ -211,6 +255,11 @@ def comprehensive_fix():
     
     print(f"\n✅ COMPLETE! Fixed {fixes} items!")
     print("🔄 Restart bot to load changes")
+    
+    # Calculate total scrap
+    total_scrap = 1350 + 176 + 14559 + 10158.5 + 6640 + 958 + 67 + 3334
+    print(f"\n📊 TOTAL SCRAP: {total_scrap} kg")
+    
     return fixes
 
 if __name__ == '__main__':
