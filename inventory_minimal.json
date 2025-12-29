@@ -1,0 +1,15 @@
+{
+  "PARTH": {
+    "6": {
+      "316L": [{"shape": "Round", "quality": "Black Coil", "weight": 1157}],
+      "304L": [{"shape": "Round", "quality": "Black Coil", "weight": 2975}]
+    },
+    "28.5": {
+      "316L": [{"shape": "Hex", "quality": "Black Ann", "weight": 473}]
+    }
+  },
+  "WADA": {
+    "MIX HEX": {"SCRAP": [{"shape": "SCRAP", "quality": "PICKLED", "weight": 1350}]},
+    "TURNING 304": {"SCRAP": [{"shape": "SCRAP", "quality": "304", "weight": 14559}]}
+  }
+}
