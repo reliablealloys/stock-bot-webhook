@@ -1,0 +1,9 @@
+{
+  "SRG_PIPES": {
+    "114x87": {"304L": [{"shape": "Pipe", "quality": "Export", "weight": 466.5}]},
+    "16x11.5": {"304L": [{"shape": "Pipe", "quality": "Export", "weight": 46.7}]},
+    "33.4x24.5": {"304L": [{"shape": "Pipe", "quality": "Export", "weight": 38}]},
+    "80x50": {"304L": [{"shape": "Pipe", "quality": "Export", "weight": 46}]}
+  },
+  "NOTE": "These are the correct pipe weights from the SRG sheet. Update inventory.json with these values."
+}
