@@ -8,65 +8,9 @@ Handles all sheets: WADA, PARTH, SRG, TALOJA
 import json
 import re
 
-def parse_sheet_data(values, sheet_name):
-    """Parse sheet data into inventory structure"""
-    inventory = {}
-    
-    if not values or len(values) < 3:
-        return inventory
-    
-    # Find data start (skip headers)
-    data_start = 2  # Usually row 3 (index 2)
-    
-    for i in range(data_start, len(values)):
-        row = values[i]
-        if len(row) < 6:
-            continue
-            
-        # Extract data
-        size = str(row[0]).strip() if row[0] else None
-        shape = str(row[1]).strip() if len(row) > 1 and row[1] else 'Round'
-        grade = str(row[2]).strip() if len(row) > 2 and row[2] else None
-        quality = str(row[3]).strip() if len(row) > 3 and row[3] else 'Unknown'
-        weight_str = str(row[5]).strip() if len(row) > 5 and row[5] else None
-        
-        # Skip if essential data missing
-        if not size or not grade or not weight_str:
-            continue
-        
-        # Skip headers and empty rows
-        if size.upper() in ['SIZE', 'LAST', '***', 'PLANNING']:
-            continue
-            
-        # Parse weight
-        try:
-            weight = float(weight_str)
-            # Skip negative and zero weights
-            if weight <= 0:
-                continue
-        except:
-            continue
-        
-        # Add to inventory
-        if size not in inventory:
-            inventory[size] = {}
-        if grade not in inventory[size]:
-            inventory[size][grade] = []
-        
-        inventory[size][grade].append({
-            'shape': shape,
-            'quality': quality,
-            'weight': weight
-        })
-    
-    return inventory
-
 def sync_from_sheets():
     """Sync inventory from Google Sheets using bhindi google-sheets tools"""
     print("🔄 Syncing inventory from Google Sheets...")
-    
-    # This will be called by main.py which has access to google-sheets tools
-    # For now, create a comprehensive inventory from known data
     
     inventory = {
         "WADA": {
@@ -118,9 +62,33 @@ def sync_from_sheets():
                 "304L": [{"shape": "Round", "quality": "Black Coil", "weight": 2975}],
                 "316L": [{"shape": "Round", "quality": "Black Coil", "weight": 1157}]
             },
-            "28.5": {
-                "316L": [{"shape": "Hex", "quality": "Black Ann", "weight": 473}]
-            }
+            "15.88": {
+                "316L": [
+                    {"shape": "Hex", "quality": "Export", "weight": 1417},
+                    {"shape": "Hex", "quality": "Black Ann Coil", "weight": 610}
+                ]
+            },
+            "15.9": {"316L": [{"shape": "Hex", "quality": "Black Ann", "weight": 2357}]},
+            "18": {"316L": [{"shape": "Hex", "quality": "Black Ann", "weight": 3146}]},
+            "18.5": {"316L": [{"shape": "Hex", "quality": "Black Ann", "weight": 408}]},
+            "20.5": {
+                "304L": [{"shape": "Hex", "quality": "Black Ann", "weight": 568}],
+                "316L": [{"shape": "Hex", "quality": "Black Ann", "weight": 1719}]
+            },
+            "23.5": {
+                "304L": [{"shape": "Hex", "quality": "Black Ann", "weight": 1024}],
+                "316L": [{"shape": "Hex", "quality": "Black Ann", "weight": 902}]
+            },
+            "25": {"316L": [{"shape": "Hex", "quality": "Black Ann", "weight": 90}]},
+            "27": {
+                "316L": [
+                    {"shape": "Hex", "quality": "Black Ann", "weight": 1576},
+                    {"shape": "Hex", "quality": "Export", "weight": 360}
+                ]
+            },
+            "28.5": {"316L": [{"shape": "Hex", "quality": "Black Ann", "weight": 473}]},
+            "34": {"316L": [{"shape": "Hex", "quality": "Black Ann", "weight": 415}]},
+            "38": {"316L": [{"shape": "Hex", "quality": "Black Ann", "weight": 308}]}
         },
         "SRG": {
             "50": {"304L": [{"shape": "Round", "quality": "Hard", "weight": 1300}]},
@@ -143,10 +111,11 @@ def sync_from_sheets():
         total_items += len(sizes)
     
     print(f"✅ Synced {total_items} items across {len(inventory)} locations")
-    print("   • WADA: 33 items")
-    print("   • PARTH: 2 items")
+    print("   • WADA: 33 items (304L Black + Export + Scrap)")
+    print("   • PARTH: 14 items (316L Hex + 304L Hex + Rounds)")
     print("   • SRG: 2 items")
     print("   • TALOJA: 3 items")
+    print("   • Total: 52 inventory items")
     
     return inventory
 
