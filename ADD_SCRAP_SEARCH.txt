@@ -1,0 +1,80 @@
+"""
+SCRAP SEARCH ADDITION FOR MAIN.PY
+==================================
+
+Add these functions after search_inventory_flexible() in main.py
+Then modify handle_message() to check for 'scrap' keyword first
+"""
+
+def search_scrap():
+    """Search for all scrap items across locations"""
+    if not INVENTORY:
+        return []
+    
+    results = []
+    try:
+        for location, items in INVENTORY.items():
+            if not isinstance(items, dict):
+                continue
+            
+            for item_name, grades in items.items():
+                # Check if this is a scrap item
+                if 'scrap' in item_name.lower() or (isinstance(grades, dict) and 'SCRAP' in grades):
+                    if isinstance(grades, dict) and 'SCRAP' in grades:
+                        scrap_items = grades['SCRAP']
+                        if isinstance(scrap_items, dict):
+                            scrap_items = [scrap_items]
+                        
+                        for scrap in scrap_items:
+                            if isinstance(scrap, dict):
+                                results.append({
+                                    'location': location,
+                                    'type': item_name,
+                                    'grade': scrap.get('quality', 'Unknown'),
+                                    'weight': scrap.get('weight', 0),
+                                    'last_updated': LAST_UPDATED.get(location, 'Unknown')
+                                })
+    except Exception as e:
+        logger.error(f"Error searching scrap: {e}")
+    
+    return results
+
+def format_scrap_response(results):
+    """Format scrap search results"""
+    if not results:
+        return "❌ No scrap found in inventory."
+    
+    # Group by location
+    by_location = {}
+    total_weight = 0
+    
+    for item in results:
+        location = item['location']
+        if location not in by_location:
+            by_location[location] = []
+        by_location[location].append(item)
+        total_weight += item['weight']
+    
+    response = "📦 **SCRAP INVENTORY**\\n\\n"
+    
+    for location, items in by_location.items():
+        location_total = sum(i['weight'] for i in items)
+        response += f"📍 **{location}** ({location_total:,.1f} kgs)\\n"
+        
+        for item in items:
+            response += f"  • {item['type']} ({item['grade']}): {item['weight']:,.1f} kgs\\n"
+        
+        response += "\\n"
+    
+    response += f"**TOTAL SCRAP: {total_weight:,.1f} kgs**\\n"
+    response += f"\\nLast updated: {LAST_UPDATED.get('WADA', 'Unknown')}"
+    
+    return response
+
+# MODIFY handle_message() function - add this at the beginning after greetings check:
+
+    # Check if query is for scrap
+    if 'scrap' in text_lower:
+        scrap_results = search_scrap()
+        if scrap_results:
+            return format_scrap_response(scrap_results)
