@@ -201,10 +201,15 @@ def send_message(chat_id, text):
         logger.error(f"Error sending message: {e}")
         return None
 
-@app.route(f'/{BOT_TOKEN}', methods=['POST'])
-def webhook():
-    """Handle incoming webhook updates"""
+@app.route('/<path:token>', methods=['POST'])
+def webhook(token):
+    """Handle incoming webhook updates - accepts any path"""
     try:
+        # Verify token matches
+        if token != BOT_TOKEN:
+            logger.warning(f"Invalid token received: {token}")
+            return jsonify({'ok': False, 'error': 'Invalid token'}), 403
+        
         update = request.get_json()
         logger.info(f"Received update: {update}")
         
@@ -217,7 +222,7 @@ def webhook():
             # Check if message was already processed
             if is_message_processed(message_id):
                 logger.info(f"Message {message_id} already processed, skipping")
-                return {'ok': True}
+                return jsonify({'ok': True})
             
             # Handle commands
             if text.startswith('/start'):
@@ -231,10 +236,10 @@ def webhook():
             
             send_message(chat_id, response)
         
-        return {'ok': True}
+        return jsonify({'ok': True})
     except Exception as e:
         logger.error(f"Error processing webhook: {e}")
-        return {'ok': False, 'error': str(e)}
+        return jsonify({'ok': False, 'error': str(e)}), 500
 
 @app.route('/')
 def index():
@@ -261,6 +266,7 @@ def get_inventory():
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 8080))
     logger.info(f"Starting bot...")
+    logger.info(f"Bot token: {BOT_TOKEN[:20]}...")
     logger.info(f"Inventory loaded: {len(INVENTORY)} locations")
     if INVENTORY:
         logger.info(f"Total items: {sum(len(sizes) for sizes in INVENTORY.values())}")
