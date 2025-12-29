@@ -32,31 +32,22 @@ def quick_fix():
                 print(f"✅ SRG {size} pipe: {weight} kg")
                 fixes += 1
     
-    # Fix WADA 304L rounds
+    # Fix WADA 304L rounds (from actual Google Sheet)
     if 'WADA' in data:
         wada_304l = {
-            '5': 255,
+            '5': 1011,
             '6': 255,
             '7.1': 1393,
             '7.13': 937,
             '7.65': 1113,
-            '8': -176,  # negative = credit
+            '8': -176,  # negative = credit/return
             '9.5': 39,
             '10': 1056,
             '10.76': 128,
             '12': 66.8,
             '12.7': 624,
             '13': 243,
-            '13.1': 21,
-            '14': 1127,
-            '14.58': 141,
-            '16': 374,
-            '18': -153,
-            '19': 95,
-            '20.2': 54,
-            '20.35': -151,
-            '22': 1305,
-            '22.2': 371
+            '13.1': 21
         }
         for size, weight in wada_304l.items():
             if size in data['WADA'] and '304L' in data['WADA'][size]:
