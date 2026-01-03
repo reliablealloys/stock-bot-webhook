@@ -1,245 +1,2150 @@
 {
-  "PARTH": {
-    "7": {"303": [{"shape": "Round", "quality": "Black Coil Ann", "weight": 6000}]},
-    "8": {"303": [{"shape": "Round", "quality": "Black Coil Ann", "weight": 2697}]},
-    "8.2": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "9": {"303": [{"shape": "Round", "quality": "Black Coil Ann", "weight": 0}]},
-    "10": {"303": [{"shape": "Round", "quality": "Black Coil Ann", "weight": 0}]},
-    "11": {"303": [{"shape": "Round", "quality": "Black Coil Ann", "weight": 0}]},
-    "13": {"303": [{"shape": "Round", "quality": "Black Coil Ann", "weight": 0}]},
-    "15": {"303": [{"shape": "Round", "quality": "Black Coil Ann", "weight": 4008}]},
-    "17.5": {"303": [{"shape": "Round", "quality": "Black Coil Ann", "weight": 2557}]},
-    "21": {"303": [{"shape": "Round", "quality": "Black Coil Ann", "weight": 1359}]},
-    "22.2": {"303": [{"shape": "Round", "quality": "Export", "weight": 29}]},
-    "26": {"303": [{"shape": "Round", "quality": "Black Ann", "weight": 3263}]},
-    "27": {"303": [{"shape": "Round", "quality": "Black", "weight": 0}, {"shape": "Round", "quality": "Black Ann", "weight": 0}]},
-    "32": {"303": [{"shape": "Round", "quality": "Black Ann", "weight": 0}]},
-    "33": {"303": [{"shape": "Round", "quality": "Export", "weight": 201}]},
-    "20.5": {"304L": [{"shape": "Hex", "quality": "Black Ann", "weight": 568}]},
-    "23.5": {"304L": [{"shape": "Hex", "quality": "Black Ann", "weight": 1024}]},
-    "18": {"DUPLEX": [{"shape": "Round", "quality": "Black Ann Coil", "weight": 6373}]},
-    "20": {"DUPLEX": [{"shape": "Round", "quality": "Export", "weight": 36}]},
-    "6": {"304L": [{"shape": "Round", "quality": "Black Coil", "weight": 2975}]},
-    "12": {"304L": [{"shape": "Round", "quality": "Export", "weight": 150}, {"shape": "Round", "quality": "Black Coil", "weight": 2230}]},
-    "6.5": {"316L": [{"shape": "Round", "quality": "Black Coil", "weight": 1157}]},
-    "7": {"316L": [{"shape": "Round", "quality": "Black Coil", "weight": 2171}]},
-    "10": {"316L": [{"shape": "Round", "quality": "Black Coil", "weight": 2497}]},
-    "15.88": {"316L": [{"shape": "Hex", "quality": "Black Ann", "weight": 2027}]},
-    "18": {"316L": [{"shape": "Hex", "quality": "Black Ann", "weight": 3146}]}
-  },
-  "WADA": {
-    "28": {"321": [{"shape": "Round", "quality": "Black", "weight": 615}]},
-    "28.2": {"321": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "100": {"304": [{"shape": "Round", "quality": "Black", "weight": 1707}]},
-    "30": {"303": [{"shape": "Round", "quality": "Black", "weight": 1523}]},
-    "34": {"303": [{"shape": "Round", "quality": "Black", "weight": 2460}]},
-    "20.5": {"303": [{"shape": "Hex", "quality": "Black Ann", "weight": 0}]},
-    "5.1": {"303": [{"shape": "Round", "quality": "DB", "weight": 0}]},
-    "6": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "6.1": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "6.2": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "7.12": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "8.2": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "10": {"303": [{"shape": "Round", "quality": "CG", "weight": 0}, {"shape": "Round", "quality": "Export", "weight": 0}]},
-    "10.15": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "11.8": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "12.7": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "15": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "16": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "17.2": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "17.5": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "19": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "20": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "24": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "25.1": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "33": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "41": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "57": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "70": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "12.7": {"304L": [{"shape": "Hex", "quality": "Export", "weight": 0}]},
-    "14.3": {"304L": [{"shape": "Hex", "quality": "Export", "weight": 0}]},
-    "16": {"304L": [{"shape": "Hex", "quality": "Export", "weight": 0}]},
-    "19": {"304L": [{"shape": "Hex", "quality": "Export", "weight": 0}]},
-    "22.2": {"304L": [{"shape": "Hex", "quality": "Export", "weight": 0}]},
-    "24": {"304L": [{"shape": "Hex", "quality": "Export", "weight": 0}, {"shape": "Hex", "quality": "ALU", "weight": 0}]},
-    "5": {"304L": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "7.1": {"304L": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "7.13": {"304L": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "7.65": {"304L": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "8": {"304L": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "9.5": {"304L": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "10.76": {"304L": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "12": {"304L": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "13": {"304L": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "13.1": {"304L": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "14": {"304L": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "14.58": {"304L": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "18": {"304L": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "20.2": {"304L": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "20.35": {"304L": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "22": {"304L": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "23.85": {"304L": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "24.1": {"304L": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "25": {"304L": [{"shape": "Round", "quality": "Black", "weight": 3763}, {"shape": "Round", "quality": "Export", "weight": 0}]},
-    "25.4": {"304L": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "28.1": {"304L": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "30": {"304L": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "30.3": {"304L": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "30.4": {"304L": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "31": {"304L": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "35.1": {"304L": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "36": {"304L": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "42.2": {"304L": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "50": {"304L": [{"shape": "Round", "quality": "Black", "weight": 3650}]},
-    "60": {"304L": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "110": {"304L": [{"shape": "Round", "quality": "Black", "weight": 3613}]},
-    "150": {"304L": [{"shape": "Round", "quality": "Black", "weight": 3500}]},
-    "9": {"304L": [{"shape": "Square", "quality": "Black Coil", "weight": 0}]},
-    "12.7x6.35": {"304L": [{"shape": "Patti", "quality": "Export", "weight": 0}]},
-    "13x6": {"304L": [{"shape": "Patti", "quality": "Export", "weight": 0}]},
-    "20x15": {"303": [{"shape": "Patti", "quality": "Export", "weight": 0}]},
-    "75x35": {"316L": [{"shape": "Patti", "quality": "Export", "weight": 0}]},
-    "24": {"316L": [{"shape": "Round", "quality": "Black", "weight": 363}]},
-    "60": {"316L": [{"shape": "Round", "quality": "Black", "weight": 1200}]},
-    "120": {"316L": [{"shape": "Round", "quality": "Black", "weight": 2360}]},
-    "16": {"DUPLEX": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "17.5": {"DUPLEX": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "20": {"DUPLEX": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "22": {"DUPLEX": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "24": {"DUPLEX": [{"shape": "Round", "quality": "Black Coil Ann", "weight": 0}]}
-  },
-  "SRG": {
-    "28": {"1117": [{"shape": "Round", "quality": "Black", "weight": 0}]},
-    "114x87": {"304L": [{"shape": "Pipe", "quality": "Export", "weight": 0}]},
-    "16x11.5": {"304L": [{"shape": "Pipe", "quality": "Export", "weight": 0}]},
-    "33.4x24.5": {"304L": [{"shape": "Pipe", "quality": "Export", "weight": 0}]},
-    "80x50": {"304L": [{"shape": "Pipe", "quality": "Export", "weight": 0}]},
-    "36": {"308": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "45": {"308": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "10x5": {"304L": [{"shape": "Patti", "quality": "ALU", "weight": 0}]},
-    "10x6": {"304L": [{"shape": "Patti", "quality": "ALU", "weight": 0}]},
-    "12x6": {"304L": [{"shape": "Patti", "quality": "Export", "weight": 0}]},
-    "63.5x32": {"316L": [{"shape": "Patti", "quality": "Export", "weight": 0}]},
-    "5": {"303": [{"shape": "Round", "quality": "Export", "weight": 400}]},
-    "5.02": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "6": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "6.1": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "6.2": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "6.5": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "7.1": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "7.12": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "7.65": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "7.8": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "8": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "8.2": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "9": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "9.5": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "9.85": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "10": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "10.05": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "10.1": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "11": {"303": [{"shape": "Round", "quality": "Rejection", "weight": 0}]},
-    "11.4": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "11.5": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "12": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "12.1": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "15": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "15.5": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "15.65": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "15.8": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "16": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "17": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "17.1": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "17.2": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "17.5": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "19": {"303": [{"shape": "Round", "quality": "DB", "weight": 800}]},
-    "20": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "22": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "22.2": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "24": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "25": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "26": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "26.5": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "28": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "28.2": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "28.5": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "29": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "30": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "32.2": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "33": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "36": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "36.1": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "38": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "42": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "50": {"303": [{"shape": "Round", "quality": "CG", "weight": 1200}], "EN36C": [{"shape": "Round", "quality": "Black", "weight": 2146}]},
-    "110": {"303": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "130": {"303": [{"shape": "Round", "quality": "Rejection", "weight": 2000}]},
-    "8": {"303": [{"shape": "Hex", "quality": "DB", "weight": 400}]},
-    "10": {"303": [{"shape": "Hex", "quality": "ALU", "weight": 0}]},
-    "17": {"303": [{"shape": "Hex", "quality": "Export", "weight": 0}]},
-    "19": {"303": [{"shape": "Hex", "quality": "Export", "weight": 0}]},
-    "24": {"303": [{"shape": "Hex", "quality": "Export", "weight": 0}]},
-    "25.4": {"303": [{"shape": "Hex", "quality": "Export", "weight": 0}]},
-    "27": {"303": [{"shape": "Hex", "quality": "Export", "weight": 0}]},
-    "44.5": {"303": [{"shape": "Hex", "quality": "ALU", "weight": 850}]},
-    "5": {"304L": [{"shape": "Round", "quality": "Export", "weight": 450}]},
-    "19": {"304L": [{"shape": "Round", "quality": "DB", "weight": 850}]},
-    "50": {"304L": [{"shape": "Round", "quality": "Hard", "weight": 1300}]},
-    "145": {"304L": [{"shape": "Round", "quality": "Black", "weight": 2200}]},
-    "4": {"316L": [{"shape": "Round", "quality": "Export", "weight": 350}]},
-    "25": {"316L": [{"shape": "Round", "quality": "DB", "weight": 900}]},
-    "175": {"316L": [{"shape": "Round", "quality": "Hard", "weight": 2500}]},
-    "14": {"316TI": [{"shape": "Round", "quality": "Standard", "weight": 600}]},
-    "17": {"316TI": [{"shape": "Hex", "quality": "Standard", "weight": 700}]}
-  },
-  "TALOJA": {
-    "100": {"304L": [{"shape": "Round", "quality": "Black", "weight": 1201}], "8620": [{"shape": "Round", "quality": "Black", "weight": 2606}]},
-    "105": {"304L": [{"shape": "Round", "quality": "Black", "weight": 0}]},
-    "110": {"304L": [{"shape": "Round", "quality": "Black", "weight": 0}]},
-    "102x18": {"304": [{"shape": "Pipe", "quality": "Standard", "weight": 0}]},
-    "108x14": {"304": [{"shape": "Pipe", "quality": "Standard", "weight": 0}]},
-    "133x18": {"304": [{"shape": "Pipe", "quality": "Standard", "weight": 0}]},
-    "70": {"304L": [{"shape": "Round", "quality": "Bright Export", "weight": 950}]},
-    "72": {"304L": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "75": {"304L": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "130": {"304L": [{"shape": "Round", "quality": "Export", "weight": 0}]},
-    "140": {"304L": [{"shape": "Round", "quality": "Black", "weight": 4435}, {"shape": "Round", "quality": "Export", "weight": 0}]},
-    "115": {"303": [{"shape": "Round", "quality": "Black", "weight": 2029}]},
-    "140": {"303": [{"shape": "Round", "quality": "Black Annealing", "weight": 0}]},
-    "60": {"316L": [{"shape": "Round", "quality": "Black", "weight": 590}]},
-    "100": {"316L": [{"shape": "Round", "quality": "Black", "weight": 1200}]},
-    "120": {"316L": [{"shape": "Round", "quality": "Black", "weight": 1800}]},
-    "200": {"316L": [{"shape": "Round", "quality": "Black", "weight": 2312}]},
-    "75": {"316L": [{"shape": "Round", "quality": "Bright Export", "weight": 1100}]},
-    "160": {"316L": [{"shape": "Round", "quality": "Bright Export", "weight": 2000}]}
-  },
-  "SHEETS": {
-    "0.35": {"202": [{"shape": "Sheet", "quality": "8x4 Rose Gold Wave No8", "weight": 0}]},
-    "0.45": {"202": [{"shape": "Sheet", "quality": "8x4 Gold No8", "weight": 31.6}, {"shape": "Sheet", "quality": "8x4 Embossed Lotus", "weight": 200.9}, {"shape": "Sheet", "quality": "8x4 Embossed Panda", "weight": 122.7}]},
-    "0.5": {"202": [{"shape": "Sheet", "quality": "8x4 Rose Gold No8", "weight": 212}, {"shape": "Sheet", "quality": "8x4 Black No8", "weight": 0}, {"shape": "Sheet", "quality": "8x4 Gold No4", "weight": 598.2}, {"shape": "Sheet", "quality": "8x4 Gold No8", "weight": 1113.9}, {"shape": "Sheet", "quality": "8x4 Rose Gold No4", "weight": 62}], "304": [{"shape": "Sheet", "quality": "8x4 Gold No8", "weight": 24.8}, {"shape": "Sheet", "quality": "8x4 Gold No8", "weight": 1238.2}, {"shape": "Sheet", "quality": "8x4 No4 PVC", "weight": 11.5}]},
-    "0.53": {"202": [{"shape": "Sheet", "quality": "8x4 Wooden Rose Gold No8", "weight": 337.5}]},
-    "0.6": {"202": [{"shape": "Sheet", "quality": "8x4 Green No8", "weight": 236.7}, {"shape": "Sheet", "quality": "8x4 Blue No8", "weight": 39.9}, {"shape": "Sheet", "quality": "8x4 Gold/Silver Punching", "weight": 537.7}, {"shape": "Sheet", "quality": "8x4 Silver Design", "weight": 108}, {"shape": "Sheet", "quality": "8x4 Silver/Gold Oval Design", "weight": 121.5}, {"shape": "Sheet", "quality": "8x4 Rose Gold Silver Punch", "weight": 0}, {"shape": "Sheet", "quality": "8x4 Black Gold Punch", "weight": 0}, {"shape": "Sheet", "quality": "8x4 Gold Punch", "weight": 67.5}, {"shape": "Sheet", "quality": "8x4 Purple White Punch", "weight": 166}], "304": [{"shape": "Sheet", "quality": "8x4 Rose Gold No8 PVC", "weight": 603}, {"shape": "Sheet", "quality": "8x4 Gold No8", "weight": 460.4}]},
-    "0.62": {"202": [{"shape": "Sheet", "quality": "8x4 Purple No8 (Not Proper)", "weight": 76.7}]},
-    "0.65": {"202": [{"shape": "Sheet", "quality": "8x4 Rose Gold No4", "weight": 777.2}]},
-    "0.7": {"202": [{"shape": "Sheet", "quality": "8x4 Black No8", "weight": 784.3}]},
-    "0.71": {"304": [{"shape": "Sheet", "quality": "8x4 Rose Gold No4", "weight": 802.9}, {"shape": "Sheet", "quality": "8x4 Bronze No4", "weight": 0}]},
-    "0.75": {"202": [{"shape": "Sheet", "quality": "8x4 Rose Gold No8", "weight": 0}, {"shape": "Sheet", "quality": "8x4 Gold No8", "weight": 1248.7}, {"shape": "Sheet", "quality": "8x4 Rose Gold No4", "weight": 145.5}, {"shape": "Sheet", "quality": "8x4 Embossed Lotus", "weight": 227.6}, {"shape": "Sheet", "quality": "8x4 Embossed Panda", "weight": 228.9}, {"shape": "Sheet", "quality": "8x4 No8 Mirror", "weight": 12.6}], "304": [{"shape": "Sheet", "quality": "8x4 Rose Gold No8 PVC", "weight": 352.6}, {"shape": "Sheet", "quality": "8x4 Black Hairline", "weight": 370}, {"shape": "Sheet", "quality": "8x4 Gold No4", "weight": 0}]},
-    "0.8": {"202": [{"shape": "Sheet", "quality": "8x4 No8 PVC", "weight": 0}, {"shape": "Sheet", "quality": "8x4 Antique Bronze", "weight": 0}], "304": [{"shape": "Sheet", "quality": "8x4 No4 PVC", "weight": 54.8}, {"shape": "Sheet", "quality": "8x4 Gold No8 PVC", "weight": 709.1}, {"shape": "Sheet", "quality": "8x4 BA/PVC No8 PVC", "weight": 14}, {"shape": "Sheet", "quality": "8x4 Gold Water Ripple (M)", "weight": 177}, {"shape": "Sheet", "quality": "8x4 Black Water Ripple (M)", "weight": 159.3}, {"shape": "Sheet", "quality": "8x4 Rose Gold Water Ripple (S)", "weight": 0}, {"shape": "Sheet", "quality": "8x4 Rose Gold Water Ripple (M)", "weight": 177}, {"shape": "Sheet", "quality": "8x4 Gold Water Ripple (S)", "weight": 177}, {"shape": "Sheet", "quality": "8x4 Black Water Ripple (S)", "weight": 177}, {"shape": "Sheet", "quality": "8x4 Black No8", "weight": 369.5}]},
-    "0.9": {"202": [{"shape": "Sheet", "quality": "8x4 Black No8", "weight": 0}, {"shape": "Sheet", "quality": "8x4 Gold No8", "weight": 866.1}], "304": [{"shape": "Sheet", "quality": "8x4 Rose Gold No4 PVC", "weight": 149.5}, {"shape": "Sheet", "quality": "8x4 Gold No8", "weight": 740.6}]},
-    "0.91": {"304": [{"shape": "Sheet", "quality": "8x4 Black No8", "weight": 563}, {"shape": "Sheet", "quality": "8x4 Sandblast Gold", "weight": 222}, {"shape": "Sheet", "quality": "8x4 Gold No4", "weight": 840}, {"shape": "Sheet", "quality": "8x4 Black No4 (Hairline)", "weight": 1180.2}, {"shape": "Sheet", "quality": "8x4 Rose Gold No4", "weight": 257.7}, {"shape": "Sheet", "quality": "8x4 Linen Silver", "weight": 625.5}, {"shape": "Sheet", "quality": "8x4 Bronze No4", "weight": 406.6}, {"shape": "Sheet", "quality": "8x4 Rose Gold Linen", "weight": 173.5}]},
-    "0.95": {"202": [{"shape": "Sheet", "quality": "8x4 Gold No8", "weight": 111.6}, {"shape": "Sheet", "quality": "8x4 Rose Gold No8", "weight": 646.9}]},
-    "1": {"202": [{"shape": "Sheet", "quality": "8x4 No8 PVC", "weight": 39.6}], "304": [{"shape": "Sheet", "quality": "8x4 Linen Rose Gold", "weight": 192.4}, {"shape": "Sheet", "quality": "8x4 BA/No8 PVC", "weight": 50.1}, {"shape": "Sheet", "quality": "8x4 Linen Gold", "weight": 169.6}, {"shape": "Sheet", "quality": "8x4 Gold No8 PVC", "weight": 119.9}, {"shape": "Sheet", "quality": "8x4 Linen Black", "weight": 194.7}]},
-    "1.2": {"202": [{"shape": "Sheet", "quality": "8x4 No8 PVC", "weight": 12.3}], "304": [{"shape": "Sheet", "quality": "8x4 No4 PVC", "weight": 0}, {"shape": "Sheet", "quality": "8x4 Gold No8 PVC", "weight": 213}, {"shape": "Sheet", "quality": "8x4 2B", "weight": 13.2}, {"shape": "Sheet", "quality": "8x4 Gold Linen", "weight": 990}, {"shape": "Sheet", "quality": "8x4 BA/No8 PVC", "weight": 39.4}]},
-    "1.5": {"202": [{"shape": "Sheet", "quality": "8x4 2B", "weight": 54.5}, {"shape": "Sheet", "quality": "8x4 No8 PVC", "weight": 25.1}], "304": [{"shape": "Sheet", "quality": "8x4 Leathar", "weight": 840}, {"shape": "Sheet", "quality": "8x4 Linen", "weight": 730}, {"shape": "Sheet", "quality": "8x4 Rombo", "weight": 850}, {"shape": "Sheet", "quality": "8x4 Checker Plate", "weight": 890}, {"shape": "Sheet", "quality": "8x4 2B JT Coil Cut", "weight": 0}, {"shape": "Sheet", "quality": "8x4 No4 PVC", "weight": 1132.7}, {"shape": "Sheet", "quality": "8x4 Gold No8", "weight": 69.1}, {"shape": "Sheet", "quality": "10x4 Gold No8", "weight": 787.3}]}
-  },
-  "RELIABLE ALLOYS": {
-    "28": {"1117": [{"shape": "Round", "quality": "Black", "weight": 510}]},
-    "40": {"1117": [{"shape": "Round", "quality": "Black", "weight": 2450}]},
-    "42": {"EN9": [{"shape": "Round", "quality": "Export", "weight": 350}]},
-    "32": {"EN36C": [{"shape": "Round", "quality": "Black", "weight": 1664}]},
-    "50": {"EN36C": [{"shape": "Round", "quality": "Black", "weight": 2146}]},
-    "100": {"8620": [{"shape": "Round", "quality": "Black", "weight": 0}]},
-    "85": {"8620": [{"shape": "Round", "quality": "Black", "weight": 816}]},
-    "96x86": {"A106": [{"shape": "Pipe 96x86", "quality": "Black", "weight": 2243}]}
+  "last_updated": "2026-01-03T11:59:00Z",
+  "locations": {
+    "PARTH": {
+      "7": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "BLACK COIL ANN",
+            "weight": 0
+          }
+        ]
+      },
+      "8": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "BLACK COIL ANN",
+            "weight": 0
+          }
+        ]
+      },
+      "8.2": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "9": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "BLACK COIL ANN",
+            "weight": 0
+          }
+        ]
+      },
+      "10": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "BLACK COIL ANN",
+            "weight": 0
+          }
+        ]
+      },
+      "11": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "BLACK COIL ANN",
+            "weight": 0
+          }
+        ]
+      },
+      "13": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "BLACK COIL ANN",
+            "weight": 0
+          }
+        ]
+      },
+      "15": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "BLACK COIL ANN",
+            "weight": 0
+          }
+        ]
+      },
+      "17.5": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "BLACK COIL ANN",
+            "weight": 0
+          }
+        ]
+      },
+      "21": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "BLACK COIL ANN",
+            "weight": 0
+          }
+        ]
+      },
+      "22.2": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "26": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "BLACK ANN",
+            "weight": 0
+          }
+        ]
+      },
+      "27": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "BLACK",
+            "weight": 0
+          },
+          {
+            "shape": "ROUND",
+            "quality": "BLACK ANN",
+            "weight": 0
+          }
+        ]
+      },
+      "32": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "BLACK ANN",
+            "weight": 0
+          }
+        ]
+      },
+      "33": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "20.5": {
+        "304L": [
+          {
+            "shape": "HEX",
+            "quality": "BLACK ANN",
+            "weight": 0
+          }
+        ]
+      },
+      "23.5": {
+        "304L": [
+          {
+            "shape": "HEX",
+            "quality": "BLACK ANN",
+            "weight": 0
+          }
+        ]
+      },
+      "18": {
+        "DUPLEX": [
+          {
+            "shape": "ROUND",
+            "quality": "BLACK ANN COIL",
+            "weight": 0
+          }
+        ]
+      },
+      "20": {
+        "DUPLEX": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "23": {
+        "DUPLEX": [
+          {
+            "shape": "ROUND",
+            "quality": "BLACK COIL ANN",
+            "weight": 0
+          }
+        ]
+      }
+    },
+    "WADA": {
+      "28": {
+        "321": [
+          {
+            "shape": "ROUND",
+            "quality": "BLACK",
+            "weight": 0
+          }
+        ]
+      },
+      "28.2": {
+        "321": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "100": {
+        "304": [
+          {
+            "shape": "ROUND",
+            "quality": "BLACK",
+            "weight": 0
+          }
+        ]
+      },
+      "30": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "BLACK",
+            "weight": 0
+          }
+        ]
+      },
+      "34": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "BLACK",
+            "weight": 0
+          }
+        ]
+      },
+      "20.5": {
+        "303": [
+          {
+            "shape": "HEX",
+            "quality": "BLACK ANN",
+            "weight": 0
+          }
+        ]
+      },
+      "5.1": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "DB",
+            "weight": 0
+          }
+        ]
+      },
+      "6": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ],
+        "304L": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "6.1": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "6.2": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "7.12": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "8.2": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "10": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "CG",
+            "weight": 0
+          },
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ],
+        "304L": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "10.15": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "11.8": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "12.7": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ],
+        "304L": [
+          {
+            "shape": "HEX",
+            "quality": "EXPORT",
+            "weight": 0
+          },
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "15": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "16": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ],
+        "304L": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ],
+        "DUPLEX": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "17.2": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "17.5": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ],
+        "DUPLEX": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "19": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ],
+        "304L": [
+          {
+            "shape": "HEX",
+            "quality": "EXPORT",
+            "weight": 0
+          },
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "20": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ],
+        "DUPLEX": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "24": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ],
+        "304L": [
+          {
+            "shape": "HEX",
+            "quality": "EXPORT",
+            "weight": 0
+          },
+          {
+            "shape": "HEX",
+            "quality": "ALU",
+            "weight": 0
+          },
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ],
+        "DUPLEX": [
+          {
+            "shape": "ROUND",
+            "quality": "BLACK COIL ANN",
+            "weight": 0
+          }
+        ]
+      },
+      "25.1": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "33": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "41": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "57": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "70": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "14.3": {
+        "304L": [
+          {
+            "shape": "HEX",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "22.2": {
+        "304L": [
+          {
+            "shape": "HEX",
+            "quality": "EXPORT",
+            "weight": 0
+          },
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ],
+        "DUPLEX": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "5": {
+        "304L": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "7.1": {
+        "304L": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "7.13": {
+        "304L": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "7.65": {
+        "304L": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "8": {
+        "304L": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "9.5": {
+        "304L": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "10.76": {
+        "304L": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "12": {
+        "304L": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "13": {
+        "304L": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "13.1": {
+        "304L": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "14": {
+        "304L": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "14.58": {
+        "304L": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "18": {
+        "304L": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "20.2": {
+        "304L": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "20.35": {
+        "304L": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "22": {
+        "304L": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "23.85": {
+        "304L": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "24.1": {
+        "304L": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "25": {
+        "304L": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "25.4": {
+        "304L": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "28.1": {
+        "304L": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "30.3": {
+        "304L": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "30.4": {
+        "304L": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "31": {
+        "304L": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "35.1": {
+        "304L": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "36": {
+        "304L": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "42.2": {
+        "304L": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "60": {
+        "304L": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "78": {
+        "304L": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "9": {
+        "304L": [
+          {
+            "shape": "SQUARE",
+            "quality": "BLACK COIL",
+            "weight": 0
+          }
+        ]
+      },
+      "12.7X6.35": {
+        "304L": [
+          {
+            "shape": "PATTI",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "13X6": {
+        "304L": [
+          {
+            "shape": "PATTI",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "20X15": {
+        "303": [
+          {
+            "shape": "PATTI",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "75X35": {
+        "316L": [
+          {
+            "shape": "PATTI",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      }
+    },
+    "TALOJA": {
+      "100": {
+        "304L": [
+          {
+            "shape": "ROUND",
+            "quality": "BLACK",
+            "weight": 0
+          }
+        ]
+      },
+      "105": {
+        "304L": [
+          {
+            "shape": "ROUND",
+            "quality": "BLACK",
+            "weight": 0
+          }
+        ]
+      },
+      "110": {
+        "304L": [
+          {
+            "shape": "ROUND",
+            "quality": "BLACK",
+            "weight": 0
+          }
+        ]
+      },
+      "102*18": {
+        "304": [
+          {
+            "shape": "PIPE",
+            "quality": "",
+            "weight": 0
+          }
+        ]
+      },
+      "108*14": {
+        "304": [
+          {
+            "shape": "PIPE",
+            "quality": "",
+            "weight": 0
+          }
+        ]
+      },
+      "133*18": {
+        "304": [
+          {
+            "shape": "PIPE",
+            "quality": "",
+            "weight": 0
+          }
+        ]
+      },
+      "102X66": {
+        "304L": [
+          {
+            "shape": "PIPE",
+            "quality": "SEAMLESS",
+            "weight": 0
+          }
+        ]
+      },
+      "70": {
+        "304L": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "32": {
+        "304L": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "72": {
+        "304L": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "75": {
+        "304L": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "130": {
+        "304L": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "140": {
+        "304L": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ],
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "BLACK ANNEALING",
+            "weight": 0
+          }
+        ]
+      },
+      "115": {
+        "303": [
+          {
+            "shape": "round",
+            "quality": "BLACK ANNEALING",
+            "weight": 0
+          }
+        ]
+      }
+    },
+    "SRG": {
+      "28": {
+        "1117": [
+          {
+            "shape": "ROUND",
+            "quality": "BLACK",
+            "weight": 0
+          }
+        ]
+      },
+      "114X87": {
+        "304L": [
+          {
+            "shape": "PIPE",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "16X11.5": {
+        "304L": [
+          {
+            "shape": "PIPE",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "33.4X24.5": {
+        "304L": [
+          {
+            "shape": "PIPE",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "80X50": {
+        "304L": [
+          {
+            "shape": "PIPE",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "36": {
+        "308": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "45": {
+        "308": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "10X5": {
+        "304L": [
+          {
+            "shape": "PATTI",
+            "quality": "ALU",
+            "weight": 0
+          }
+        ]
+      },
+      "10X6": {
+        "304L": [
+          {
+            "shape": "PATTI",
+            "quality": "ALU",
+            "weight": 0
+          }
+        ]
+      },
+      "12X6": {
+        "304L": [
+          {
+            "shape": "PATTI",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "63.5X32": {
+        "316L": [
+          {
+            "shape": "PATTI",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "5": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "5.02": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "6": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "6.1": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "6.2": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "6.5": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "7.1": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "7.12": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "7.65": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "7.8": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "8": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "8.2": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "9": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "9.5": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "9.85": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "10": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "10.05": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "10.1": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "11": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "REJECTION",
+            "weight": 0
+          }
+        ]
+      },
+      "11.4": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "11.5": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "12": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "12.1": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "15": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "15.5": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "15.65": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "15.8": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "16": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "17": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "17.1": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "17.2": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "17.5": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "19": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "20": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "22": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "22.2": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "24": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "25": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "26": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "26.5": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "28.2": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "28.5": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "29": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "30": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "32.2": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "33": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "38": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "42": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "110": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "130": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "8": {
+        "303": [
+          {
+            "shape": "HEX",
+            "quality": "DB",
+            "weight": 0
+          }
+        ]
+      },
+      "10": {
+        "303": [
+          {
+            "shape": "HEX",
+            "quality": "ALU",
+            "weight": 0
+          }
+        ]
+      },
+      "17": {
+        "303": [
+          {
+            "shape": "HEX",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "19": {
+        "303": [
+          {
+            "shape": "HEX",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "24": {
+        "303": [
+          {
+            "shape": "HEX",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "25.4": {
+        "303": [
+          {
+            "shape": "HEX",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "27": {
+        "303": [
+          {
+            "shape": "HEX",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      },
+      "44.5": {
+        "303": [
+          {
+            "shape": "HEX",
+            "quality": "EXPORT",
+            "weight": 0
+          }
+        ]
+      }
+    },
+    "SHEETS": {
+      "0.35": {
+        "202": [
+          {
+            "shape": "SHEET",
+            "quality": "ROSE GOLD WAVE NO8",
+            "weight": 0
+          }
+        ]
+      },
+      "0.45": {
+        "202": [
+          {
+            "shape": "SHEET",
+            "quality": "Gold No 8",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "EMBOSSED LOTUS",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "EMBOSSED PANDA",
+            "weight": 0
+          }
+        ]
+      },
+      "0.5": {
+        "202": [
+          {
+            "shape": "SHEET",
+            "quality": "Rose Gold No8",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "Black No8",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "Gold NO4",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "GOLD NO8",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "ROSE GOLD NO4",
+            "weight": 0
+          }
+        ],
+        "304": [
+          {
+            "shape": "SHEET",
+            "quality": "Gold No 8",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "No 4 PVC",
+            "weight": 0
+          }
+        ]
+      },
+      "0.53": {
+        "202": [
+          {
+            "shape": "SHEET",
+            "quality": "WOODEN ROSE GOLD NO8",
+            "weight": 0
+          }
+        ]
+      },
+      "0.6": {
+        "202": [
+          {
+            "shape": "SHEET",
+            "quality": "Green No8",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "Blue No8",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "Gold/Silver Punching",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "SILVER DESIGN",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "SILVER / GOLD OVAL DESIGN",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "ROSE GOLD SILVER PUNCH",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "BLACK GOLD PUNCH",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "GOLD PUNCH",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "PURPLE WHITE PUNCH",
+            "weight": 0
+          }
+        ],
+        "304": [
+          {
+            "shape": "SHEET",
+            "quality": "Rose Gold No 8 PVC",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "GOLD NO8",
+            "weight": 0
+          }
+        ]
+      },
+      "0.62": {
+        "202": [
+          {
+            "shape": "SHEET",
+            "quality": "PURPLE NO8(NOT PROPER)",
+            "weight": 0
+          }
+        ]
+      },
+      "0.65": {
+        "202": [
+          {
+            "shape": "SHEET",
+            "quality": "ROSE GOLD NO4",
+            "weight": 0
+          }
+        ]
+      },
+      "0.7": {
+        "202": [
+          {
+            "shape": "SHEET",
+            "quality": "Black No8",
+            "weight": 0
+          }
+        ]
+      },
+      "0.71": {
+        "304": [
+          {
+            "shape": "SHEET",
+            "quality": "ROSE GOLD NO4",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "BRONZE NO4",
+            "weight": 0
+          }
+        ]
+      },
+      "0.75": {
+        "202": [
+          {
+            "shape": "SHEET",
+            "quality": "Rose Gold No8",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "GOLD NO8",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "ROSE GOLD NO4",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "EMBOSSED LOTUS",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "EMBOSSED PANDA",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "NO8 MIRROR",
+            "weight": 0
+          }
+        ],
+        "304": [
+          {
+            "shape": "SHEET",
+            "quality": "Rose Gold No 8 PVC",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "BLACK HAIRLINE",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "GOLD NO4",
+            "weight": 0
+          }
+        ]
+      },
+      "0.8": {
+        "202": [
+          {
+            "shape": "SHEET",
+            "quality": "No 8 PVC",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "ANTIQUE BRONZE",
+            "weight": 0
+          }
+        ],
+        "304": [
+          {
+            "shape": "SHEET",
+            "quality": "No 4 PVC",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "Gold No 8 PVC",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "BA / PVC NO8 PVC",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "GOLD WATER RIPPLE(M)",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "BLACK WATER RIPPLE(M)",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "ROSE GOLD WATER RIPPLE(S)",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "ROSE GOLD WATER RIPPLE(M)",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "GOLD WATER RIPPLE(S)",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "BLACK WATER RIPPLE(S)",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "BLACK NO8",
+            "weight": 0
+          }
+        ]
+      },
+      "0.9": {
+        "202": [
+          {
+            "shape": "SHEET",
+            "quality": "Black No8",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "GOLD NO8",
+            "weight": 0
+          }
+        ],
+        "304": [
+          {
+            "shape": "SHEET",
+            "quality": "Rose Gold No 4 PVC",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "GOLD NO8",
+            "weight": 0
+          }
+        ]
+      },
+      "0.91": {
+        "304": [
+          {
+            "shape": "SHEET",
+            "quality": "BLACK NO8",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "SANDBLAST GOLD",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "GOLD NO4",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "BLACK NO4(HAIRLINE)",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "ROSE GOLD NO4",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "LINEN SILVER",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "BRONZE NO4",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "ROSE GOLD LINEN",
+            "weight": 0
+          }
+        ]
+      },
+      "0.95": {
+        "202": [
+          {
+            "shape": "SHEET",
+            "quality": "Gold No8",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "ROSE GOLD NO8",
+            "weight": 0
+          }
+        ]
+      },
+      "1": {
+        "202": [
+          {
+            "shape": "SHEET",
+            "quality": "No 8 PVC",
+            "weight": 0
+          }
+        ],
+        "304": [
+          {
+            "shape": "SHEET",
+            "quality": "LINEN ROSE GOLD",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "BA / NO8 PVC",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "LINEN GOLD",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "Gold No 8 PVC",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "LINEN BLACK",
+            "weight": 0
+          }
+        ]
+      },
+      "1.2": {
+        "202": [
+          {
+            "shape": "SHEET",
+            "quality": "No 8 PVC",
+            "weight": 0
+          }
+        ],
+        "304": [
+          {
+            "shape": "SHEET",
+            "quality": "No 4 PVC",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "Gold No 8 PVC",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "2B",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "Gold Linen",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "BA / NO8 PVC",
+            "weight": 0
+          }
+        ]
+      },
+      "1.5": {
+        "202": [
+          {
+            "shape": "SHEET",
+            "quality": "2B",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "No 8 PVC",
+            "weight": 0
+          }
+        ],
+        "304": [
+          {
+            "shape": "SHEET",
+            "quality": "Leathar",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "Linen",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "Rombo",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "Checker Plate",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "2B JT COIL CUT",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "No 4 PVC",
+            "weight": 0
+          },
+          {
+            "shape": "SHEET",
+            "quality": "GOLD NO8",
+            "weight": 0
+          }
+        ]
+      },
+      "MIX": {
+        "304": [
+          {
+            "shape": "SHEET",
+            "quality": "MIX QUALITY 19/20",
+            "weight": 0
+          }
+        ]
+      }
+    }
   }
 }
