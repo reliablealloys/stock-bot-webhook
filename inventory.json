@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-01-04T05:59:00Z",
+  "last_updated": "2026-01-04T11:59:00Z",
   "locations": {
     "PARTH": {
       "5.5": {
@@ -400,11 +400,6 @@
             "shape": "ROUND",
             "quality": "EXPORT",
             "weight": ""
-          },
-          {
-            "shape": "PATTI",
-            "quality": "EXPORT",
-            "weight": "12.7X6.35"
           }
         ]
       },
@@ -428,6 +423,11 @@
         "304L": [
           {
             "shape": "HEX",
+            "quality": "EXPORT",
+            "weight": ""
+          },
+          {
+            "shape": "ROUND",
             "quality": "EXPORT",
             "weight": ""
           }
@@ -520,13 +520,6 @@
             "shape": "HEX",
             "quality": "ALU",
             "weight": ""
-          }
-        ],
-        "DUPLEX": [
-          {
-            "shape": "ROUND",
-            "quality": "BLACK",
-            "weight": "COIL ANN"
           }
         ]
       },
@@ -765,6 +758,13 @@
             "quality": "EXPORT",
             "weight": ""
           }
+        ],
+        "DUPLEX": [
+          {
+            "shape": "ROUND",
+            "quality": "BLACK",
+            "weight": "COIL ANN"
+          }
         ]
       },
       "25": {
@@ -881,6 +881,15 @@
             "shape": "SQUARE",
             "quality": "BLACK",
             "weight": "COIL"
+          }
+        ]
+      },
+      "12.7X6.35": {
+        "304L": [
+          {
+            "shape": "PATTI",
+            "quality": "EXPORT",
+            "weight": ""
           }
         ]
       },
@@ -1245,7 +1254,7 @@
             "weight": ""
           }
         ],
-        "303": [
+        "303_HEX": [
           {
             "shape": "HEX",
             "quality": "DB",
@@ -1297,7 +1306,7 @@
             "weight": ""
           }
         ],
-        "303": [
+        "303_HEX": [
           {
             "shape": "HEX",
             "quality": "ALU",
@@ -1419,7 +1428,9 @@
             "shape": "ROUND",
             "quality": "EXPORT",
             "weight": ""
-          },
+          }
+        ],
+        "303_HEX": [
           {
             "shape": "HEX",
             "quality": "EXPORT",
@@ -1460,7 +1471,9 @@
             "shape": "ROUND",
             "quality": "EXPORT",
             "weight": ""
-          },
+          }
+        ],
+        "303_HEX": [
           {
             "shape": "HEX",
             "quality": "EXPORT",
@@ -1501,7 +1514,9 @@
             "shape": "ROUND",
             "quality": "EXPORT",
             "weight": ""
-          },
+          }
+        ],
+        "303_HEX": [
           {
             "shape": "HEX",
             "quality": "EXPORT",
@@ -1513,15 +1528,6 @@
         "303": [
           {
             "shape": "ROUND",
-            "quality": "EXPORT",
-            "weight": ""
-          }
-        ]
-      },
-      "25.4": {
-        "303": [
-          {
-            "shape": "HEX",
             "quality": "EXPORT",
             "weight": ""
           }
@@ -1545,15 +1551,10 @@
           }
         ]
       },
-      "27": {
+      "28": {
         "303": [
           {
             "shape": "ROUND",
-            "quality": "EXPORT",
-            "weight": ""
-          },
-          {
-            "shape": "HEX",
             "quality": "EXPORT",
             "weight": ""
           }
@@ -1613,6 +1614,15 @@
           }
         ]
       },
+      "36": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": ""
+          }
+        ]
+      },
       "36.1": {
         "303": [
           {
@@ -1658,8 +1668,26 @@
           }
         ]
       },
+      "25.4": {
+        "303_HEX": [
+          {
+            "shape": "HEX",
+            "quality": "EXPORT",
+            "weight": ""
+          }
+        ]
+      },
+      "27": {
+        "303_HEX": [
+          {
+            "shape": "HEX",
+            "quality": "EXPORT",
+            "weight": ""
+          }
+        ]
+      },
       "44.5": {
-        "303": [
+        "303_HEX": [
           {
             "shape": "HEX",
             "quality": "EXPORT",
@@ -1804,6 +1832,11 @@
           {
             "shape": "SHEET",
             "quality": "Rose Gold No 8 PVC",
+            "weight": "8 X 4"
+          },
+          {
+            "shape": "SHEET",
+            "quality": "GOLD NO8",
             "weight": "8 X 4"
           }
         ]
