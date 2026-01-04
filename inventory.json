@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-01-04T11:59:00Z",
+  "last_updated": "2026-01-04T17:59:00Z",
   "locations": {
     "PARTH": {
       "5.5": {
@@ -58,6 +58,11 @@
             "shape": "ROUND",
             "quality": "BLACK",
             "weight": "COIL ANN"
+          },
+          {
+            "shape": "ROUND",
+            "quality": "PLANNING",
+            "weight": "COIL ANN"
           }
         ]
       },
@@ -67,6 +72,11 @@
             "shape": "ROUND",
             "quality": "BLACK",
             "weight": "COIL ANN"
+          },
+          {
+            "shape": "ROUND",
+            "quality": "PLANNING",
+            "weight": "ANN COIL"
           }
         ]
       },
@@ -103,6 +113,11 @@
             "shape": "ROUND",
             "quality": "BLACK",
             "weight": "COIL ANN"
+          },
+          {
+            "shape": "ROUND",
+            "quality": "PLANNING",
+            "weight": "ANN COIL"
           }
         ],
         "DUPLEX": [
@@ -110,6 +125,27 @@
             "shape": "ROUND",
             "quality": "BLACK",
             "weight": "ANN COIL"
+          },
+          {
+            "shape": "ROUND",
+            "quality": "PLANNING",
+            "weight": "ANN COIL"
+          }
+        ]
+      },
+      "19": {
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "PLANNING",
+            "weight": "ANN"
+          }
+        ],
+        "DUPLEX": [
+          {
+            "shape": "ROUND",
+            "quality": "PLANNING",
+            "weight": "COIL ANN"
           }
         ]
       },
@@ -119,12 +155,22 @@
             "shape": "ROUND",
             "quality": "BLACK",
             "weight": "COIL ANN"
+          },
+          {
+            "shape": "ROUND",
+            "quality": "PLANNING",
+            "weight": "COIL ANN"
           }
         ],
         "DUPLEX": [
           {
             "shape": "ROUND",
             "quality": "BLACK",
+            "weight": "ANN"
+          },
+          {
+            "shape": "ROUND",
+            "quality": "PLANNING",
             "weight": "ANN"
           }
         ]
@@ -143,6 +189,11 @@
           {
             "shape": "ROUND",
             "quality": "BLACK",
+            "weight": "ANN"
+          },
+          {
+            "shape": "ROUND",
+            "quality": "PLANNING",
             "weight": "ANN"
           }
         ],
@@ -187,6 +238,11 @@
             "shape": "HEX",
             "quality": "BLACK",
             "weight": "ANN"
+          },
+          {
+            "shape": "HEX",
+            "quality": "PLANNING",
+            "weight": "ANN"
           }
         ]
       },
@@ -222,6 +278,97 @@
           {
             "shape": "ROUND",
             "quality": "BLACK",
+            "weight": "COIL ANN"
+          },
+          {
+            "shape": "ROUND",
+            "quality": "PLANNING",
+            "weight": ""
+          },
+          {
+            "shape": "ROUND",
+            "quality": "PLANNING",
+            "weight": "COIL ANN"
+          }
+        ]
+      },
+      "17": {
+        "DUPLEX": [
+          {
+            "shape": "ROUND",
+            "quality": "PLANNING",
+            "weight": "ANN COIL"
+          }
+        ]
+      },
+      "18.3": {
+        "DUPLEX": [
+          {
+            "shape": "ROUND",
+            "quality": "PLANNING",
+            "weight": "COIL ANN"
+          }
+        ]
+      },
+      "22": {
+        "DUPLEX": [
+          {
+            "shape": "ROUND",
+            "quality": "PLANNING",
+            "weight": "ANN COIL"
+          }
+        ]
+      },
+      "24": {
+        "DUPLEX": [
+          {
+            "shape": "ROUND",
+            "quality": "PLANNING",
+            "weight": "COIL ANN"
+          }
+        ]
+      },
+      "27.5": {
+        "DUPLEX": [
+          {
+            "shape": "ROUND",
+            "quality": "PLANNING",
+            "weight": "ANN"
+          }
+        ]
+      },
+      "42": {
+        "DUPLEX": [
+          {
+            "shape": "ROUND",
+            "quality": "PLANNING",
+            "weight": "ANN"
+          }
+        ]
+      },
+      "16": {
+        "304L": [
+          {
+            "shape": "HEX",
+            "quality": "PLANNING",
+            "weight": "ANN"
+          }
+        ]
+      },
+      "9": {
+        "304L": [
+          {
+            "shape": "SQUARE",
+            "quality": "PLANNING",
+            "weight": "ANN COIL"
+          }
+        ]
+      },
+      "14X7": {
+        "304L": [
+          {
+            "shape": "PATTI",
+            "quality": "PLANNING",
             "weight": "COIL ANN"
           }
         ]
@@ -521,6 +668,13 @@
             "quality": "ALU",
             "weight": ""
           }
+        ],
+        "DUPLEX": [
+          {
+            "shape": "ROUND",
+            "quality": "BLACK",
+            "weight": "COIL ANN"
+          }
         ]
       },
       "25.1": {
@@ -757,13 +911,6 @@
             "shape": "ROUND",
             "quality": "EXPORT",
             "weight": ""
-          }
-        ],
-        "DUPLEX": [
-          {
-            "shape": "ROUND",
-            "quality": "BLACK",
-            "weight": "COIL ANN"
           }
         ]
       },
@@ -1252,9 +1399,7 @@
             "shape": "ROUND",
             "quality": "EXPORT",
             "weight": ""
-          }
-        ],
-        "303_HEX": [
+          },
           {
             "shape": "HEX",
             "quality": "DB",
@@ -1304,9 +1449,7 @@
             "shape": "ROUND",
             "quality": "EXPORT",
             "weight": ""
-          }
-        ],
-        "303_HEX": [
+          },
           {
             "shape": "HEX",
             "quality": "ALU",
@@ -1428,9 +1571,7 @@
             "shape": "ROUND",
             "quality": "EXPORT",
             "weight": ""
-          }
-        ],
-        "303_HEX": [
+          },
           {
             "shape": "HEX",
             "quality": "EXPORT",
@@ -1471,9 +1612,7 @@
             "shape": "ROUND",
             "quality": "EXPORT",
             "weight": ""
-          }
-        ],
-        "303_HEX": [
+          },
           {
             "shape": "HEX",
             "quality": "EXPORT",
@@ -1514,9 +1653,7 @@
             "shape": "ROUND",
             "quality": "EXPORT",
             "weight": ""
-          }
-        ],
-        "303_HEX": [
+          },
           {
             "shape": "HEX",
             "quality": "EXPORT",
@@ -1669,7 +1806,7 @@
         ]
       },
       "25.4": {
-        "303_HEX": [
+        "303": [
           {
             "shape": "HEX",
             "quality": "EXPORT",
@@ -1678,7 +1815,7 @@
         ]
       },
       "27": {
-        "303_HEX": [
+        "303": [
           {
             "shape": "HEX",
             "quality": "EXPORT",
@@ -1687,7 +1824,7 @@
         ]
       },
       "44.5": {
-        "303_HEX": [
+        "303": [
           {
             "shape": "HEX",
             "quality": "EXPORT",
@@ -1868,20 +2005,6 @@
           }
         ]
       },
-      "0.71": {
-        "304": [
-          {
-            "shape": "SHEET",
-            "quality": "ROSE GOLD NO4",
-            "weight": "8 X 4"
-          },
-          {
-            "shape": "SHEET",
-            "quality": "BRONZE NO4",
-            "weight": "8 X 4"
-          }
-        ]
-      },
       "0.75": {
         "202": [
           {
@@ -2025,50 +2148,6 @@
           }
         ]
       },
-      "0.91": {
-        "304": [
-          {
-            "shape": "SHEET",
-            "quality": "BLACK NO8",
-            "weight": "8 X 4"
-          },
-          {
-            "shape": "SHEET",
-            "quality": "SANDBLAST GOLD",
-            "weight": "8 X 4"
-          },
-          {
-            "shape": "SHEET",
-            "quality": "GOLD NO4",
-            "weight": "8 X 4"
-          },
-          {
-            "shape": "SHEET",
-            "quality": "BLACK NO4(HAIRLINE)",
-            "weight": "8 X 4"
-          },
-          {
-            "shape": "SHEET",
-            "quality": "ROSE GOLD NO4",
-            "weight": "8 X 4"
-          },
-          {
-            "shape": "SHEET",
-            "quality": "LINEN SILVER",
-            "weight": "8 X 4"
-          },
-          {
-            "shape": "SHEET",
-            "quality": "BRONZE NO4",
-            "weight": "8 X 4"
-          },
-          {
-            "shape": "SHEET",
-            "quality": "ROSE GOLD LINEN",
-            "weight": "8 X 4"
-          }
-        ]
-      },
       "0.95": {
         "202": [
           {
@@ -2208,6 +2287,64 @@
             "shape": "SHEET",
             "quality": "GOLD NO8",
             "weight": "10 X 4"
+          }
+        ]
+      },
+      "0.71": {
+        "304": [
+          {
+            "shape": "SHEET",
+            "quality": "ROSE GOLD NO4",
+            "weight": "8 X 4"
+          },
+          {
+            "shape": "SHEET",
+            "quality": "BRONZE NO4",
+            "weight": "8 X 4"
+          }
+        ]
+      },
+      "0.91": {
+        "304": [
+          {
+            "shape": "SHEET",
+            "quality": "BLACK NO8",
+            "weight": "8 X 4"
+          },
+          {
+            "shape": "SHEET",
+            "quality": "SANDBLAST GOLD",
+            "weight": "8 X 4"
+          },
+          {
+            "shape": "SHEET",
+            "quality": "GOLD NO4",
+            "weight": "8 X 4"
+          },
+          {
+            "shape": "SHEET",
+            "quality": "BLACK NO4(HAIRLINE)",
+            "weight": "8 X 4"
+          },
+          {
+            "shape": "SHEET",
+            "quality": "ROSE GOLD NO4",
+            "weight": "8 X 4"
+          },
+          {
+            "shape": "SHEET",
+            "quality": "LINEN SILVER",
+            "weight": "8 X 4"
+          },
+          {
+            "shape": "SHEET",
+            "quality": "BRONZE NO4",
+            "weight": "8 X 4"
+          },
+          {
+            "shape": "SHEET",
+            "quality": "ROSE GOLD LINEN",
+            "weight": "8 X 4"
           }
         ]
       },
