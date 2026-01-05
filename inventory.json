@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-01-05T05:59:30Z",
+  "last_updated": "2026-01-05T11:59:30Z",
   "locations": {
     "PARTH": {
       "5.5": {
@@ -939,15 +939,6 @@
           }
         ]
       },
-      "30": {
-        "304L": [
-          {
-            "shape": "ROUND",
-            "quality": "EXPORT",
-            "weight": ""
-          }
-        ]
-      },
       "30.3": {
         "304L": [
           {
@@ -1209,6 +1200,13 @@
             "quality": "BLACK",
             "weight": ""
           }
+        ],
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": ""
+          }
         ]
       },
       "114X87": {
@@ -1249,6 +1247,13 @@
       },
       "36": {
         "308": [
+          {
+            "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": ""
+          }
+        ],
+        "303": [
           {
             "shape": "ROUND",
             "quality": "EXPORT",
@@ -1398,6 +1403,13 @@
             "quality": "EXPORT",
             "weight": ""
           }
+        ],
+        "303_HEX": [
+          {
+            "shape": "HEX",
+            "quality": "DB",
+            "weight": ""
+          }
         ]
       },
       "8.2": {
@@ -1441,6 +1453,13 @@
           {
             "shape": "ROUND",
             "quality": "EXPORT",
+            "weight": ""
+          }
+        ],
+        "303_HEX": [
+          {
+            "shape": "HEX",
+            "quality": "ALU",
             "weight": ""
           }
         ]
@@ -1560,6 +1579,13 @@
             "quality": "EXPORT",
             "weight": ""
           }
+        ],
+        "303_HEX": [
+          {
+            "shape": "HEX",
+            "quality": "EXPORT",
+            "weight": ""
+          }
         ]
       },
       "17.1": {
@@ -1593,6 +1619,13 @@
         "303": [
           {
             "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": ""
+          }
+        ],
+        "303_HEX": [
+          {
+            "shape": "HEX",
             "quality": "EXPORT",
             "weight": ""
           }
@@ -1632,12 +1665,28 @@
             "quality": "EXPORT",
             "weight": ""
           }
+        ],
+        "303_HEX": [
+          {
+            "shape": "HEX",
+            "quality": "EXPORT",
+            "weight": ""
+          }
         ]
       },
       "25": {
         "303": [
           {
             "shape": "ROUND",
+            "quality": "EXPORT",
+            "weight": ""
+          }
+        ]
+      },
+      "25.4": {
+        "303_HEX": [
+          {
+            "shape": "HEX",
             "quality": "EXPORT",
             "weight": ""
           }
@@ -1661,10 +1710,10 @@
           }
         ]
       },
-      "28": {
-        "303": [
+      "27": {
+        "303_HEX": [
           {
-            "shape": "ROUND",
+            "shape": "HEX",
             "quality": "EXPORT",
             "weight": ""
           }
@@ -1760,80 +1809,8 @@
           }
         ]
       },
-      "130": {
-        "303": [
-          {
-            "shape": "ROUND",
-            "quality": "EXPORT",
-            "weight": ""
-          }
-        ]
-      },
-      "8": {
-        "303": [
-          {
-            "shape": "HEX",
-            "quality": "DB",
-            "weight": ""
-          }
-        ]
-      },
-      "10": {
-        "303": [
-          {
-            "shape": "HEX",
-            "quality": "ALU",
-            "weight": ""
-          }
-        ]
-      },
-      "17": {
-        "303": [
-          {
-            "shape": "HEX",
-            "quality": "EXPORT",
-            "weight": ""
-          }
-        ]
-      },
-      "19": {
-        "303": [
-          {
-            "shape": "HEX",
-            "quality": "EXPORT",
-            "weight": ""
-          }
-        ]
-      },
-      "24": {
-        "303": [
-          {
-            "shape": "HEX",
-            "quality": "EXPORT",
-            "weight": ""
-          }
-        ]
-      },
-      "25.4": {
-        "303": [
-          {
-            "shape": "HEX",
-            "quality": "EXPORT",
-            "weight": ""
-          }
-        ]
-      },
-      "27": {
-        "303": [
-          {
-            "shape": "HEX",
-            "quality": "EXPORT",
-            "weight": ""
-          }
-        ]
-      },
       "44.5": {
-        "303": [
+        "303_HEX": [
           {
             "shape": "HEX",
             "quality": "EXPORT",
