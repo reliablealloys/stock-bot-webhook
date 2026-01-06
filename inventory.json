@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-01-06T05:59:00Z",
+  "last_updated": "2026-01-06T11:59:00Z",
   "locations": {
     "PARTH": {
       "5.5": {
@@ -1183,18 +1183,18 @@
         ]
       },
       "140": {
-        "303": [
-          {
-            "shape": "ROUND",
-            "quality": "BLACK",
-            "weight": "ANNEALING"
-          }
-        ],
         "304L": [
           {
             "shape": "ROUND",
             "quality": "EXPORT",
             "weight": ""
+          }
+        ],
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "BLACK",
+            "weight": "ANNEALING"
           }
         ]
       }
@@ -1296,7 +1296,9 @@
             "shape": "ROUND",
             "quality": "EXPORT",
             "weight": ""
-          },
+          }
+        ],
+        "303": [
           {
             "shape": "HEX",
             "quality": "DB",
@@ -1346,7 +1348,9 @@
             "shape": "ROUND",
             "quality": "EXPORT",
             "weight": ""
-          },
+          }
+        ],
+        "303": [
           {
             "shape": "HEX",
             "quality": "ALU",
@@ -2218,6 +2222,13 @@
         ]
       },
       "1": {
+        "202": [
+          {
+            "shape": "SHEET",
+            "quality": "No 8 PVC",
+            "weight": "8 X 4"
+          }
+        ],
         "304": [
           {
             "shape": "SHEET",
@@ -2244,16 +2255,16 @@
             "quality": "LINEN BLACK",
             "weight": "8 X 4"
           }
-        ],
+        ]
+      },
+      "1.2": {
         "202": [
           {
             "shape": "SHEET",
             "quality": "No 8 PVC",
             "weight": "8 X 4"
           }
-        ]
-      },
-      "1.2": {
+        ],
         "304": [
           {
             "shape": "SHEET",
@@ -2280,16 +2291,21 @@
             "quality": "BA / NO8 PVC",
             "weight": "8 X 4"
           }
-        ],
+        ]
+      },
+      "1.5": {
         "202": [
+          {
+            "shape": "SHEET",
+            "quality": "2B",
+            "weight": "8 X 4"
+          },
           {
             "shape": "SHEET",
             "quality": "No 8 PVC",
             "weight": "8 X 4"
           }
-        ]
-      },
-      "1.5": {
+        ],
         "304": [
           {
             "shape": "SHEET",
@@ -2330,18 +2346,6 @@
             "shape": "SHEET",
             "quality": "GOLD NO8",
             "weight": "10 X 4"
-          }
-        ],
-        "202": [
-          {
-            "shape": "SHEET",
-            "quality": "2B",
-            "weight": "8 X 4"
-          },
-          {
-            "shape": "SHEET",
-            "quality": "No 8 PVC",
-            "weight": "8 X 4"
           }
         ]
       },
