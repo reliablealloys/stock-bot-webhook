@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-01-09T00:00:00Z",
+  "last_updated": "2026-01-09T05:59:00Z",
   "locations": {
     "PARTH": {
       "5.5": {
@@ -1296,9 +1296,7 @@
             "shape": "ROUND",
             "quality": "EXPORT",
             "weight": ""
-          }
-        ],
-        "303": [
+          },
           {
             "shape": "HEX",
             "quality": "DB",
@@ -1348,9 +1346,7 @@
             "shape": "ROUND",
             "quality": "EXPORT",
             "weight": ""
-          }
-        ],
-        "303": [
+          },
           {
             "shape": "HEX",
             "quality": "ALU",
