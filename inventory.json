@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-01-08T17:59:30Z",
+  "last_updated": "2026-01-09T00:00:00Z",
   "locations": {
     "PARTH": {
       "5.5": {
@@ -1183,18 +1183,18 @@
         ]
       },
       "140": {
-        "303": [
-          {
-            "shape": "ROUND",
-            "quality": "BLACK",
-            "weight": "ANNEALING"
-          }
-        ],
         "304L": [
           {
             "shape": "ROUND",
             "quality": "EXPORT",
             "weight": ""
+          }
+        ],
+        "303": [
+          {
+            "shape": "ROUND",
+            "quality": "BLACK",
+            "weight": "ANNEALING"
           }
         ]
       }
@@ -1296,7 +1296,9 @@
             "shape": "ROUND",
             "quality": "EXPORT",
             "weight": ""
-          },
+          }
+        ],
+        "303": [
           {
             "shape": "HEX",
             "quality": "DB",
@@ -1346,7 +1348,9 @@
             "shape": "ROUND",
             "quality": "EXPORT",
             "weight": ""
-          },
+          }
+        ],
+        "303": [
           {
             "shape": "HEX",
             "quality": "ALU",
